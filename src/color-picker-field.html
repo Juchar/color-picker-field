@@ -1,0 +1,434 @@
+<link href="../../polymer/polymer-element.html" rel="import">
+<link href="../../vaadin-themable-mixin/vaadin-themable-mixin.html" rel="import">
+<link href="../../vaadin-element-mixin/vaadin-element-mixin.html" rel="import">
+<link href="../../vaadin-text-field/src/vaadin-text-field.html" rel="import">
+<link href="../../vaadin-button/src/vaadin-button.html" rel="import">
+<link href="../../color-picker/src/color-picker.html" rel="import">
+<link href="../../color-picker/src/libraries/chroma-js-import.html" rel="import">
+<link href="../../color-picker/src/utils/color-picker-utils.html" rel="import">
+<link href="../../vcf-popup/src/vcf-popup.html" rel="import">
+
+<dom-module id="color-picker-field-template">
+  <template>
+    <style>
+      [part="select-color-button"] {
+        overflow: hidden;
+        position: relative;
+        box-sizing: border-box;
+      }
+
+      [part="select-color-button-color"] {
+        width: 100%;
+        height: 100%;
+      }
+
+      :host([disabled]) [part="select-color-button"] {
+        opacity: .2;
+      }
+
+      :host([readonly]) [part="select-color-button"],
+      :host([readonly]) [part="switch-format-button"] {
+        pointer-events: none;
+      }
+
+      [part="select-color-button-icon"] {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0.3);
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+        padding: 4px;
+        opacity: 0;
+      }
+
+      :host(:not([readonly])) [part="select-color-button"]:hover [part="select-color-button-icon"] {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+      }
+
+      [part="switch-format-button"] {
+        padding: 2px;
+        box-sizing: border-box;
+      }
+
+      [part="switch-format-button"][disabled] {
+        pointer-events: none;
+      }
+
+      [part="popup-content"] {
+        display: flex;
+        flex-direction: column;
+      }
+
+      [part="footer"] {
+        display: flex;
+      }
+
+      [part="submit"],
+      [part="cancel"] {
+        flex-grow: 1;
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+    </style>
+
+    <span id="select-color-button" part="select-color-button">
+      <div part="select-color-button-color"></div>
+      <iron-icon icon="vaadin:paintbrush" part="select-color-button-icon"></iron-icon>
+    </span>
+    <vcf-popup for="select-color-button" part="color-popup">
+      <template>
+        <div part="popup-content">
+          <color-picker value="{{_popUpColor}}" previous-value="{{_previousColor}}" theme$="[[theme]]"
+                        disable-hex="{{disableHex}}"
+                        disable-rgb="{{disableRgb}}"
+                        disable-hsl="{{disableHsl}}"
+                        disable-alpha="{{disableAlpha}}"
+                        pinned-inputs="{{pinnedInputs}}"
+                        pinned-palettes="{{pinnedPalettes}}"
+                        palettes="{{palettes}}"
+                        step-alpha="{{stepAlpha}}"
+                        step-hsl="{{stepHsl}}"></color-picker>
+          <div part="footer">
+            <vaadin-button theme$="[[theme]]" part="cancel" on-click="_cancelPopUp">{{labelCancel}}</vaadin-button>
+            <vaadin-button theme$="primary [[theme]]" part="submit" on-click="_selectPopUpColor">{{labelSelect}}
+            </vaadin-button>
+          </div>
+        </div>
+      </template>
+    </vcf-popup>
+    <iron-icon part="switch-format-button" icon="vaadin:sort"
+               hidden$="[[!_showChangeFormatButton(disableHex,disableRgb,disableHsl)]]"
+               on-mousedown="_changeFormatButtonMouseDown"
+               on-touchend="_changeFormatButtonTouchend"
+               on-click="_nextFormat"></iron-icon>
+  </template>
+
+  <script>
+    (function() {
+      let memoizedTemplate;
+
+      /**
+       * `<color-picker-field>` allows to select a color using sliders, inputs or palettes.
+       *
+       * ```
+       * <color-picker-field></color-picker-field>
+       * ```
+       *
+       * @memberof Vaadin.ColorPicker
+       * @mixes Vaadin.ElementMixin
+       * @mixes Vaadin.ThemableMixin
+       * @demo demo/index.html
+       */
+      class ColorPickerField extends Vaadin.TextFieldElement {
+
+        static get is() {
+          return 'color-picker-field';
+        }
+
+        static get version() {
+          return '0.1.0';
+        }
+
+        static get properties() {
+          return {
+            labelSelect: {
+              type: String,
+              value: 'Select',
+              notify: true
+            },
+            labelCancel: {
+              type: String,
+              value: 'Cancel',
+              notify: true
+            },
+            disableHex: {
+              type: Boolean,
+              notify: true,
+              observer: '_updateInputPattern'
+            },
+            disableRgb: {
+              type: Boolean,
+              notify: true,
+              observer: '_updateInputPattern'
+            },
+            disableHsl: {
+              type: Boolean,
+              notify: true,
+              observer: '_updateInputPattern'
+            },
+            disableAlpha: {
+              type: Boolean,
+              notify: true,
+              observer: '_updateInputPattern'
+            },
+            pinnedInputs: {
+              type: Boolean,
+              notify: true
+            },
+            pinnedPalettes: {
+              type: Boolean,
+              notify: true
+            },
+            palettes: {
+              type: Array,
+              notify: true
+            },
+            stepAlpha: {
+              type: Number,
+              notify: true
+            },
+            stepHsl: {
+              type: Number,
+              notify: true
+            },
+            enableHistory: {
+              type: Boolean,
+              value: false
+            },
+            maxHistory: {
+              type: Number,
+              value: 10
+            },
+            enableCssCustomProperties: {
+              type: Boolean,
+              value: false
+            },
+            _popUpColor: {
+              type: String,
+              value: 'hsl(0,100%,50%)',
+              notify: true
+            },
+            _previousColor: {
+              type: String,
+              notify: true
+            },
+            _history: {
+              type: Array,
+              value: []
+            },
+            _selectColorButtonColor: Object,
+            _selectColorButtonIcon: Object,
+            _changeFormatButton: Object,
+            _popUp: Object
+          };
+        }
+
+        static get template() {
+          if (!memoizedTemplate) {
+            memoizedTemplate = super.template.cloneNode(true);
+
+            const thisTemplate = Polymer.DomModule.import(this.is + '-template', 'template');
+            const colorButton = thisTemplate.content.querySelector('[part="select-color-button"]');
+            const colorPopup = thisTemplate.content.querySelector('[part="color-popup"]');
+            const switchFormatButton = thisTemplate.content.querySelector('[part="switch-format-button"]');
+            const styles = thisTemplate.content.querySelector('style');
+            const inputField = memoizedTemplate.content.querySelector('[part="input-field"]');
+            const prefixSlot = memoizedTemplate.content.querySelector('[name="prefix"]');
+            const suffixSlot = memoizedTemplate.content.querySelector('[name="suffix"]');
+
+            inputField.insertBefore(colorButton, prefixSlot.nextSibling);
+            inputField.insertBefore(colorPopup, prefixSlot.nextSibling);
+            inputField.insertBefore(switchFormatButton, suffixSlot);
+            memoizedTemplate.content.appendChild(styles);
+          }
+
+          return memoizedTemplate;
+        }
+
+        constructor() {
+          super();
+          this._updateInputPattern();
+        }
+
+        ready() {
+          super.ready();
+
+          this._popUp = this.shadowRoot.querySelector('vcf-popup');
+          this._selectColorButtonIcon = this.shadowRoot.querySelector('[part="select-color-button-icon"]');
+          this._selectColorButtonColor = this.shadowRoot.querySelector('[part="select-color-button-color"]');
+          this._changeFormatButton = this.shadowRoot.querySelector('[part="switch-format-button"]');
+
+          this._createPropertyObserver('value', '_updateOnValueChange', true);
+          this._updateOnValueChange();
+        }
+
+        _showChangeFormatButton() {
+          return this._getEnabledFormats().length > 1;
+        }
+
+        _changeFormatButtonMouseDown(e) {
+          if (this.hasAttribute('focused')) {
+            e.preventDefault();
+          }
+        }
+
+        _changeFormatButtonTouchend(e) {
+          e.preventDefault();
+          this._nextFormat();
+          this.inputElement.focus();
+        }
+
+        _nextFormat() {
+          this.inputElement.blur();
+
+          const allFormats = this._getEnabledFormats();
+          const format = ColorPickerField._getColorFormat(this.value);
+          const nextFormat = allFormats[(allFormats.indexOf(format) + 1) % allFormats.length];
+          const resolvedColor = this._getResolvedColor();
+          const resolution = this['step' + nextFormat.charAt(0).toUpperCase() + nextFormat.slice(1)] || 1;
+
+          this.value = ColorPickerUtils.getFormattedColor(resolvedColor, nextFormat, this.stepAlpha, resolution)
+            .replace(/,/g, ', ');
+
+          this.inputElement.focus();
+        }
+
+        _selectPopUpColor() {
+          this._cancelPopUp();
+          this.value = this._popUpColor.replace(/,/g, ', ');
+          this.inputElement.focus();
+        }
+
+        _cancelPopUp() {
+          this._popUp.opened = false;
+        }
+
+        _updateOnValueChange() {
+          this._changeFormatButton.removeAttribute('disabled');
+
+          const validColor = '' !== this.value.trim() && this.checkValidity();
+          if (validColor) {
+            const color = this._getResolvedColor();
+            if (color !== undefined) {
+              this._updateSelectedColor(color);
+              this._updateHistory(color);
+            } else {
+              this._changeFormatButton.setAttribute('disabled', 'disabled');
+            }
+          } else {
+            this._changeFormatButton.setAttribute('disabled', 'disabled');
+          }
+        }
+
+        _updateSelectedColor(color) {
+          if (this._selectColorButtonColor) {
+            this._selectColorButtonColor.style.background = color;
+          }
+
+          if (this._selectColorButtonIcon) {
+            this._selectColorButtonIcon.style.color = ColorPickerUtils.getContrastColor(color);
+          }
+
+          this._popUpColor = this.value;
+          this._previousColor = this.value;
+        }
+
+        _updateHistory(color) {
+          if (this.enableHistory) {
+            const newColor = color.css();
+            this.palettes = [(this.palettes
+              ? [newColor, ...this.palettes[0].filter(v => v !== newColor)].slice(0, this.maxHistory)
+              : [newColor])];
+          }
+        }
+
+        _getResolvedColor() {
+          if (this.enableCssCustomProperties && /--[a-zA-Z0-9]+[a-zA-Z0-9-]*/gm.test(this.value)) {
+            const propertyValue = window.getComputedStyle(this).getPropertyValue(this.value).trim();
+            return propertyValue !== '' ? chroma(propertyValue) : undefined;
+          } else {
+            return chroma(this.value);
+          }
+        }
+
+        _getEnabledFormats() {
+          const formats = [];
+          if (!this.disableHex) {
+            formats.push('hex');
+          }
+
+          if (!this.disableRgb) {
+            formats.push('rgb');
+          }
+
+          if (!this.disableHsl) {
+            formats.push('hsl');
+          }
+
+          return formats;
+        }
+
+        static _getColorFormat(color) {
+          const trimmedValue = color.trim();
+          if (trimmedValue.startsWith('hsl')) {
+            return 'hsl';
+          } else if (trimmedValue.startsWith('rgb')) {
+            return 'rgb';
+          } else {
+            return 'hex';
+          }
+        }
+
+        _updateInputPattern() {
+          const patterns = [];
+
+          if (!this.disableHex) {
+            patterns.push('#([0-9a-fA-F]{2}){3}');
+            patterns.push('#[0-9a-fA-F]{3}');
+
+            if (!this.disableAlpha) {
+              patterns.push('#([0-9a-fA-F]{2}){4}');
+            }
+          }
+
+          const countDecimalPlaces = number => {
+            return number ? String(Math.abs(number)).replace(/^\d*\.?(.*)?$/, '$1').length : 0;
+          };
+
+          const decimalRegex = decimalPlaces => {
+            return decimalPlaces > 0 ? `(\\.\\d{1,${decimalPlaces}})?` : '';
+          };
+
+          const decimalPlacesAlpha = countDecimalPlaces(this.stepAlpha);
+          const decimalAlpha = decimalRegex(decimalPlacesAlpha);
+
+          if (!this.disableRgb) {
+            patterns.push('rgb\\((-?\\d+\\s*,\\s*){2}(-?\\d+\\s*)\\)');
+            patterns.push('rgb\\((-?\\d+%\\s*,\\s*){2}(-?\\d+%\\s*)\\)');
+
+            if (!this.disableAlpha) {
+              patterns.push(`rgba\\((-?\\d+\\s*,\\s*){3}(-?\\d+${decimalAlpha}\\s*)\\)`);
+              patterns.push(`rgba\\((-?\\d+%\\s*,\\s*){3}(-?\\d+${decimalAlpha}\\s*)\\)`);
+            }
+          }
+
+          if (!this.disableHsl) {
+            const decimalPlacesHsl = countDecimalPlaces(this.stepHsl);
+            const decimalHsl = decimalRegex(decimalPlacesHsl);
+
+            patterns.push(`hsl\\((-?\\d+${decimalHsl}\\s*,\\s*)(-?\\d+${decimalHsl}%\\s*,\\s*)(-?\\d+${decimalHsl}%\\s*)\\)`);
+
+            if (!this.disableAlpha) {
+              patterns.push(`hsla\\((-?\\d+${decimalHsl}\\s*,\\s*)(-?\\d+${decimalHsl}%\\s*,\\s*){2}(-?\\d+${decimalAlpha}\\s*)\\)`);
+            }
+          }
+
+          if (this.enableCssCustomProperties) {
+            patterns.push('--[a-zA-Z0-9]+[a-zA-Z0-9-]*');
+          }
+
+          this.pattern = '(' + patterns.join('|') + ')';
+        }
+      }
+
+      customElements.define(ColorPickerField.is, ColorPickerField);
+
+      window.Vaadin = window.Vaadin || {};
+      window.Vaadin.ColorPickerField = window.Vaadin.ColorPickerField || {};
+      window.Vaadin.ColorPickerField.ColorPickerField = ColorPickerField;
+    })();
+  </script>
+</dom-module>

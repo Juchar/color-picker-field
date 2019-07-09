@@ -1,0 +1,15 @@
+{
+  "name": "Color Picker Field",
+  "pages": [
+    {
+      "name": "Basics",
+      "url": "color-picker-field-basic-demos",
+      "src": "color-picker-field-basic-demos.html",
+      "meta": {
+        "title": "Color Picker Field Basics",
+        "description": "",
+        "image": ""
+      }
+    }
+  ]
+}

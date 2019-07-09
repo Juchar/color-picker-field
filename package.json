@@ -1,0 +1,50 @@
+{
+  "name": "@juchar/color-picker-field",
+  "version": "0.5.0",
+  "description": "color-picker-field",
+  "main": "color-picker-field.html",
+  "repository": "juchar/color-picker-field",
+  "keywords": [
+    "Vaadin",
+    "color-picker-field",
+    "web-components",
+    "web-component",
+    "polymer"
+  ],
+  "author": "Juchar",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/juchar/color-picker-field/issues"
+  },
+  "homepage": "https://github.com/juchar/color-picker-field",
+  "files": [
+    "vaadin-*.js",
+    "src",
+    "theme"
+  ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
+    }
+  },
+  "scripts": {
+    "check": "npm-run-all --parallel check:*",
+    "check:bower": "magi check-bower",
+    "check:version": "magi check-version",
+    "lint": "npm-run-all --parallel lint:*",
+    "lint:css": "stylelint *.html src/*.html demo/*.html theme/**/*.html",
+    "lint:html": "eslint *.html src demo --ext .html",
+    "prestart": "polymer analyze > analysis.json",
+    "start": "polymer serve --port 3000 --open",
+    "preversion": "magi update-version"
+  },
+  "devDependencies": {
+    "@vaadin/vaadin-component-dev-dependencies": "^3.0.0"
+  },
+  "dependencies": {
+    "@vaadin/vaadin-button": "^2.2.0",
+    "@vaadin/vaadin-icons": "^4.3.1",
+    "@vaadin/vaadin-tabs": "^3.0.0",
+    "@vaadin/vaadin-text-field": "^2.4.4"
+  }
+}
