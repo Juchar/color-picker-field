@@ -2,20 +2,18 @@ language: node_js
 node_js: stable
 sudo: required
 dist: trusty
-
 cache:
   directories:
-    - node_modules
-    - "$HOME/.cache/bower"
-
+  - node_modules
+  - "$HOME/.cache/bower"
 script: 'true'
-
 install:
-  - npm install -g bower polymer-cli
-  - npm install
-  - bower install
-
+- npm install -g bower polymer-cli
+- npm install
+- bower install
 after_success:
-  - if [ ${TRAVIS_PULL_REQUEST} = "false" ] && [ "$TRAVIS_BRANCH" = "master" ]; then
-      bash gh-pages.sh;
-    fi
+- if [ ${TRAVIS_PULL_REQUEST} = "false" ] && [ "$TRAVIS_BRANCH" = "master" ]; then
+  bash gh-pages.sh; fi
+env:
+  global:
+    secure: vYDSKWy06SquMLHcKuz0xizRGlqu0JLS8Mx4ABX3cUGB5tN2LsgfsK3kbP+MxqV2FeGgERLdCwVLqs4w9rqDUwMAOYAECKNgmzjF6zzhR1G9KjqDsmarhoNxEsKn9+H2OGwJXApA5c8vH6aDyvqz8JN0+Yqi8rFU/Fmkar3DxnlpO3/lCTVDQSNqe7mKI9WVFVeRm7pGnCcK8nfwMHseUMQd1oMK3Ltn7NRJh7jVcJ+WaOzPm43aZsN91r0yCBQ0lKP6IfTtwPZM8hEU1unhtA1JgM94tlqFZDgh4e1/l9m1df3VhJWa+LS3jN5yZMTf0+QMp7PCYIPZSO/xfw/ouuubpA9pVj912MORLjozon2igmUhLE2EkblkhwqK66XGzm6m2ueoUoftUXXEy0DrbSPqmzg1ToXX/qRyJkjxk9fxi5DAQt9fuJ4aYSyLOcjxGkygVevkIbWHZtg3B6hAgsCgz8rM0myjTzwYwZj48KOsxJdRpc7GcMv6sRrcbtgj2tOrHkkDu6jR5EnqbfjZGAa7BIFXEORlVCuYKdlMBZjLJ8Vf8tHgo70csjOd7maEbwaQ/DNC0qqJMIIv1vh4vxGM8ePVyxODimb1QtdrZjsTzaFY5Nn36jXo6xqhXBw0C8kysb9rAlVC5/apnGTbiNSy3zw6iUS6veIc9v3t3Nk=
