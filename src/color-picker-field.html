@@ -82,15 +82,16 @@
       <template>
         <div part="popup-content">
           <color-picker value="{{_popUpColor}}" previous-value="{{_previousColor}}" theme$="[[theme]]"
-                        disable-hex="{{disableHex}}"
-                        disable-rgb="{{disableRgb}}"
-                        disable-hsl="{{disableHsl}}"
-                        disable-alpha="{{disableAlpha}}"
-                        pinned-inputs="{{pinnedInputs}}"
-                        pinned-palettes="{{pinnedPalettes}}"
-                        palettes="{{palettes}}"
-                        step-alpha="{{stepAlpha}}"
-                        step-hsl="{{stepHsl}}"></color-picker>
+                        disable-hex="[[disableHex]]"
+                        disable-rgb="[[disableRgb]]"
+                        disable-hsl="[[disableHsl]]"
+                        disable-alpha="[[disableAlpha]]"
+                        pinned-inputs="[[pinnedInputs]]"
+                        pinned-palettes="[[pinnedPalettes]]"
+                        last-used-format="{{lastUsedFormat}}"
+                        palettes="[[palettes]]"
+                        step-alpha="[[stepAlpha]]"
+                        step-hsl="[[stepHsl]]"></color-picker>
           <div part="footer">
             <vaadin-button theme$="[[theme]]" part="cancel" on-click="_cancelPopUp">{{labelCancel}}</vaadin-button>
             <vaadin-button theme$="primary [[theme]]" part="submit" on-click="_selectPopUpColor">{{labelSelect}}
@@ -134,64 +135,110 @@
 
         static get properties() {
           return {
+            /**
+             * The label to show on the button to select a color in the color picker popup.
+             */
             labelSelect: {
               type: String,
-              value: 'Select',
-              notify: true
+              value: 'Select'
             },
+            /**
+             * The label to show on the button to cancel/close the color picker popup.
+             */
             labelCancel: {
               type: String,
-              value: 'Cancel',
-              notify: true
+              value: 'Cancel'
             },
+            /**
+             * Set to true to disable **hex** input.
+             */
             disableHex: {
               type: Boolean,
-              notify: true,
+              value: false,
               observer: '_updateInputPattern'
             },
+            /**
+             * Set to true to disable **rgb** input.
+             */
             disableRgb: {
               type: Boolean,
-              notify: true,
+              value: false,
               observer: '_updateInputPattern'
             },
+            /**
+             * Set to true to disable **hsl** input.
+             */
             disableHsl: {
               type: Boolean,
-              notify: true,
+              value: false,
               observer: '_updateInputPattern'
             },
+            /**
+             * Set to true to disable **alpha** input and **alpha** slider.
+             */
             disableAlpha: {
               type: Boolean,
-              notify: true,
+              value: false,
               observer: '_updateInputPattern'
             },
+            /**
+             * Set to true to have all inputs visible all the time instead of having a switch button.
+             */
             pinnedInputs: {
               type: Boolean,
-              notify: true
+              value: false
             },
+            /**
+             * Set to true to have all palettes visible all the time instead of having a switch button.
+             */
             pinnedPalettes: {
               type: Boolean,
+              value: false
+            },
+            /**
+             * The format that the user used last as input or by switching inputs. One of `hex`,`rgb`,`hsl`.
+             */
+            lastUsedFormat: {
+              type: String,
               notify: true
             },
-            palettes: {
-              type: Array,
-              notify: true
-            },
+            /**
+             * The palettes to be shown. Should be an Array of Arrays, whereas the inner Arrays should contain valid
+             * CSS color codes or CSS Custom Properties.
+             */
+            palettes: Array,
+            /**
+             * The precision step to use for alpha values.
+             */
             stepAlpha: {
               type: Number,
-              notify: true
+              value: 0.01
             },
+            /**
+             * The precision step to use for hsl values.
+             */
             stepHsl: {
               type: Number,
-              notify: true
+              value: 1
             },
+            /**
+             * Set to true to enable the history for selected colors. If the history is enabled it is not possible to
+             * use palettes as they are internally used for the history.
+             */
             enableHistory: {
               type: Boolean,
               value: false
             },
+            /**
+             * The maximum amount of colors to be stored in the history.
+             */
             maxHistory: {
               type: Number,
               value: 10
             },
+            /**
+             * Set to true to be able to use CSS Custom Properties as input value.
+             */
             enableCssCustomProperties: {
               type: Boolean,
               value: false
