@@ -2,9 +2,9 @@
 
 [&lt;color-picker&gt;](https://github.com/juchar/color-picker-field) is a themable Web Component providing the possibility to select a color using sliders, inputs or palettes.
 
-[Live Demo ↗](https://juchar.github.io/color-picker/components/color-picker-field/demo)
+[Live Demo ↗](https://juchar.github.io/color-picker-field/components/color-picker-field/demo)
 |
-[API documentation ↗](https://juchar.github.io/color-picker/components/color-picker-field)
+[API documentation ↗](https://juchar.github.io/color-picker-field/components/color-picker-field)
 
 [![Build Status](https://travis-ci.org/Juchar/color-picker-field.svg?branch=master)](https://travis-ci.org/Juchar/color-picker-field)
 [![Bower version](https://badgen.net/github/release/juchar/color-picker-field)](https://github.com/juchar/color-picker-field/releases)
@@ -105,7 +105,8 @@ We are using [ESLint](http://eslint.org/) for linting JavaScript code. You can c
 
 ## Big Thanks
 
-Cross-browser Testing Platform and Open Source <3 Provided by [Sauce Labs](https://saucelabs.com).
+Cross-browser Testing Platform and Open Source <3 Provided by [Sauce Labs](https://saucelabs.com).  
+Huge credits also go to the developers of [Choma.js](https://github.com/gka/chroma.js) that is used for the internal color handling, released under the [BSD license](http://opensource.org/licenses/BSD-3-Clause).
 
 
 ## Contributing
