@@ -12,6 +12,16 @@
       }
     },
     {
+      "name": "Styling",
+      "url": "color-picker-field-styling-demos",
+      "src": "color-picker-field-styling-demos.html",
+      "meta": {
+        "title": "Color Picker Field Styling",
+        "description": "",
+        "image": ""
+      }
+    },
+    {
       "name": "Advanced",
       "url": "color-picker-field-advanced-demos",
       "src": "color-picker-field-advanced-demos.html",
