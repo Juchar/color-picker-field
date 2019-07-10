@@ -61,6 +61,17 @@
       </template>
     </vaadin-demo-snippet>
 
+    <h3>Native Input</h3>
+    <p>You can use the <code>native-input-media-query</code> property to specify a <a
+      href="https://www.w3schools.com/css/css_rwd_mediaqueries.asp">CSS media query</a> that is evaluated to
+      conditionally use the native input instead of the provided pop up.</p>
+    <vaadin-demo-snippet id="color-picker-field-native-input" when-defined="color-picker-field">
+      <template preserve-content>
+        <color-picker-field value="#00b4f0"
+                            native-input-media-query="(min-width: 0px), (min-height: 0px)"></color-picker-field>
+      </template>
+    </vaadin-demo-snippet>
+
     <h3>Styling</h3>
     <p>You can display the color picker field without an input by applying the theme <code>no-input</code>. </p>
     <vaadin-demo-snippet id="color-picker-field-styling" when-defined="color-picker-field">
