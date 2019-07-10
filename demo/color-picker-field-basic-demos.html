@@ -36,9 +36,28 @@
         You can use all possibilities that can be used with the <a href="https://github.com/juchar/color-picker">&lt;color-picker&gt;</a>
         to customize the color picker popup of the field. Check the <a
         href="https://juchar.github.io/color-picker/components/color-picker/demo">color picker demo</a> to view all
-        available options. Properties like e.g. <code>disable-alpha</code> will affect the input field too.
+        available options (e.g. palettes). Properties like e.g. <code>disable-alpha</code> will affect the input field
+        too.
       </p>
     </div>
+
+    <h3>Styling</h3>
+    <p>You can display the color picker field without an input by applying the theme <code>no-input</code>. Additionally
+      you can change the icon that is shown while hovering the color button.</p>
+    <vaadin-demo-snippet id="color-picker-field-styling" when-defined="color-picker-field">
+      <template preserve-content>
+        <color-picker-field value="#00b4f0" theme="no-input" hover-icon="vaadin:fill"></color-picker-field>
+      </template>
+    </vaadin-demo-snippet>
+
+    <h3>Inherited Textfield Functionality</h3>
+    <p>You can use all functionalities that <code>vaadin-text-field</code> provides as the color picker is an extension
+      of it.</p>
+    <vaadin-demo-snippet id="color-picker-text-field" when-defined="color-picker-field">
+      <template preserve-content>
+        <color-picker-field value="#00b4f0" label="Pick Color" clear-button-visible></color-picker-field>
+      </template>
+    </vaadin-demo-snippet>
 
     <h3>History</h3>
     <p>You can enable the history of picked colors by setting <code>enable-history</code>. The property <code>max-history</code>
@@ -60,35 +79,6 @@
     <vaadin-demo-snippet id="color-picker-field-css-custom-properties" when-defined="color-picker-field">
       <template preserve-content>
         <color-picker-field value="--lumo-primary-color" enable-css-custom-properties></color-picker-field>
-      </template>
-    </vaadin-demo-snippet>
-
-    <h3>Native Input</h3>
-    <p>You can use the <code>native-input-media-query</code> property to specify a <a
-      href="https://www.w3schools.com/css/css_rwd_mediaqueries.asp">CSS media query</a> that is evaluated to
-      conditionally use the native input instead of the provided pop up.</p>
-    <vaadin-demo-snippet id="color-picker-field-native-input" when-defined="color-picker-field">
-      <template preserve-content>
-        <color-picker-field value="#00b4f0"
-                            native-input-media-query="(min-width: 0px), (min-height: 0px)"></color-picker-field>
-      </template>
-    </vaadin-demo-snippet>
-
-    <h3>Styling</h3>
-    <p>You can display the color picker field without an input by applying the theme <code>no-input</code>. Additionally
-      you can change the icon that is shown while hovering the color button.</p>
-    <vaadin-demo-snippet id="color-picker-field-styling" when-defined="color-picker-field">
-      <template preserve-content>
-        <color-picker-field value="#00b4f0" theme="no-input" hover-icon="vaadin:fill"></color-picker-field>
-      </template>
-    </vaadin-demo-snippet>
-
-    <h3>Inherited Textfield Functionality</h3>
-    <p>You can use all functionalities that <code>vaadin-text-field</code> provides as the color picker is an extension
-      of it.</p>
-    <vaadin-demo-snippet id="color-picker-text-field" when-defined="color-picker-field">
-      <template preserve-content>
-        <color-picker-field value="#00b4f0" label="Pick Color" clear-button-visible></color-picker-field>
       </template>
     </vaadin-demo-snippet>
   </template>
