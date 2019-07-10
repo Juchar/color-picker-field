@@ -4,10 +4,10 @@
 <link href="../../vaadin-element-mixin/vaadin-element-mixin.html" rel="import">
 <link href="../../vaadin-text-field/src/vaadin-text-field.html" rel="import">
 <link href="../../vaadin-button/src/vaadin-button.html" rel="import">
+<link href="../../vaadin-context-menu/src/vaadin-context-menu.html" rel="import">
 <link href="../../color-picker/src/color-picker.html" rel="import">
 <link href="../../color-picker/src/libraries/chroma-js-import.html" rel="import">
 <link href="../../color-picker/src/utils/color-picker-utils.html" rel="import">
-<link href="../../vcf-popup/src/vcf-popup.html" rel="import">
 
 <dom-module id="color-picker-field-template">
   <template>
@@ -19,6 +19,9 @@
       }
 
       [part="select-color-button-color"] {
+        position: absolute;
+        top: 0;
+        left: 0;
         width: 100%;
         height: 100%;
       }
@@ -72,6 +75,7 @@
 
       [part="switch-format-button"][disabled] {
         pointer-events: none;
+        opacity: 0.4;
       }
 
       [part="popup-content"] {
@@ -92,14 +96,9 @@
     </style>
 
     <span part="select-color-button">
-      <iron-media-query query="[[nativeInputMediaQuery]]" query-matches="{{_nativeInput}}"></iron-media-query>
-      <div part="select-color-button-color"></div>
-      <iron-icon id="select-color-button-icon" icon="vaadin:paintbrush" part="select-color-button-icon"></iron-icon>
-      <input part="native-input" type="color" value="{{value::change}}" native-input$="[[_nativeInput]]">
-    </span>
-    <vcf-popup for="select-color-button-icon" part="color-popup">
-      <template>
-        <div part="popup-content">
+      <vaadin-context-menu open-on="click" close-on="_closeColorPickerPopUp" theme="color-picker-field-overlay">
+        <template>
+          <div part="popup-content">
           <color-picker disable-alpha="[[disableAlpha]]" disable-hex="[[disableHex]]" disable-hsl="[[disableHsl]]"
                         disable-rgb="[[disableRgb]]"
                         last-used-format="{{lastUsedFormat}}"
@@ -117,8 +116,13 @@
             </vaadin-button>
           </div>
         </div>
-      </template>
-    </vcf-popup>
+        </template>
+        <iron-media-query query="[[nativeInputMediaQuery]]" query-matches="{{_nativeInput}}"></iron-media-query>
+        <div part="select-color-button-color"></div>
+        <iron-icon id="select-color-button-icon" icon="vaadin:paintbrush" part="select-color-button-icon"></iron-icon>
+      </vaadin-context-menu>
+      <input part="native-input" type="color" value="{{value::change}}" native-input$="[[_nativeInput]]">
+    </span>
     <iron-icon hidden$="[[!_showChangeFormatButton(disableHex,disableRgb,disableHsl)]]" icon="vaadin:sort"
                on-click="_nextFormat"
                on-mousedown="_changeFormatButtonMouseDown"
@@ -269,23 +273,11 @@
               value: false
             },
             _nativeInput: Boolean,
-            _popUpColor: {
-              type: String,
-              value: 'hsl(0,100%,50%)',
-              notify: true
-            },
-            _previousColor: {
-              type: String,
-              notify: true
-            },
-            _history: {
-              type: Array,
-              value: []
-            },
+            _popUpColor: String,
+            _previousColor: String,
             _selectColorButtonColor: Object,
             _selectColorButtonIcon: Object,
-            _changeFormatButton: Object,
-            _popUp: Object
+            _changeFormatButton: Object
           };
         }
 
@@ -295,7 +287,6 @@
 
             const thisTemplate = Polymer.DomModule.import(this.is + '-template', 'template');
             const colorButton = thisTemplate.content.querySelector('[part="select-color-button"]');
-            const colorPopup = thisTemplate.content.querySelector('[part="color-popup"]');
             const switchFormatButton = thisTemplate.content.querySelector('[part="switch-format-button"]');
             const styles = thisTemplate.content.querySelector('style');
             const inputField = memoizedTemplate.content.querySelector('[part="input-field"]');
@@ -303,7 +294,6 @@
             const suffixSlot = memoizedTemplate.content.querySelector('[name="suffix"]');
 
             inputField.insertBefore(colorButton, prefixSlot.nextSibling);
-            inputField.insertBefore(colorPopup, prefixSlot.nextSibling);
             inputField.insertBefore(switchFormatButton, suffixSlot);
             memoizedTemplate.content.appendChild(styles);
           }
@@ -319,7 +309,6 @@
         ready() {
           super.ready();
 
-          this._popUp = this.shadowRoot.querySelector('vcf-popup');
           this._selectColorButtonIcon = this.shadowRoot.querySelector('[part="select-color-button-icon"]');
           this._selectColorButtonColor = this.shadowRoot.querySelector('[part="select-color-button-color"]');
           this._changeFormatButton = this.shadowRoot.querySelector('[part="switch-format-button"]');
@@ -359,13 +348,13 @@
           this.inputElement.focus();
         }
 
-        _selectPopUpColor() {
-          this._cancelPopUp();
+        _selectPopUpColor(e) {
+          this._cancelPopUp(e);
           this.value = this._popUpColor.replace(/,/g, ', ');
         }
 
-        _cancelPopUp() {
-          this._popUp.opened = false;
+        _cancelPopUp(e) {
+          e.target.dispatchEvent(new CustomEvent('_closeColorPickerPopUp', {composed: true}));
         }
 
         _updateOnValueChange() {
@@ -387,15 +376,15 @@
 
         _updateSelectedColor(color) {
           if (this._selectColorButtonColor) {
-            this._selectColorButtonColor.style.background = color;
+            this._selectColorButtonColor.style.background = color.css();
           }
 
           if (this._selectColorButtonIcon) {
             this._selectColorButtonIcon.style.color = ColorPickerUtils.getContrastColor(color);
           }
 
-          this._popUpColor = this.value;
-          this._previousColor = this.value;
+          this._popUpColor = color.css();
+          this._previousColor = color.css();
         }
 
         _updateHistory(color) {
@@ -503,4 +492,14 @@
       window.Vaadin.ColorPickerField.ColorPickerField = ColorPickerField;
     })();
   </script>
+</dom-module>
+
+<dom-module id="color-picker-field-overlay" theme-for="vaadin-context-menu-overlay">
+  <template>
+    <style>
+      :host([theme~="color-picker-field-overlay"]) [part="overlay"] {
+        max-height: unset;
+      }
+    </style>
+  </template>
 </dom-module>

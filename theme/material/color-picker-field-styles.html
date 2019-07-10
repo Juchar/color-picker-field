@@ -4,7 +4,7 @@
 <link href="../../../vaadin-text-field/theme/material/vaadin-text-field.html" rel="import">
 <link href="../../../vaadin-icons/vaadin-icons.html" rel="import">
 <link href="../../../vaadin-button/theme/material/vaadin-button.html" rel="import">
-<link href="../../../vcf-popup/theme/material/vcf-popup.html" rel="import">
+<link href="../../../vaadin-context-menu/theme/material/vaadin-context-menu.html" rel="import">
 <link href="../../../color-picker/theme/material/color-picker.html" rel="import">
 
 <dom-module id="material-color-picker-field" theme-for="color-picker-field">
@@ -59,6 +59,20 @@
 
       :host([theme~="no-input"]) [part="switch-format-button"] {
         display: none;
+      }
+    </style>
+  </template>
+</dom-module>
+
+<dom-module id="material-color-picker-field-overlay" theme-for="vaadin-context-menu-overlay">
+  <template>
+    <style>
+      :host([theme~="color-picker-field-overlay"]) [part="overlay"] {
+        overflow: hidden;
+      }
+
+      :host([theme~="color-picker-field-overlay"]) [part="content"] {
+        padding: 0;
       }
     </style>
   </template>

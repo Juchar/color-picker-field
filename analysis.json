@@ -738,11 +738,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 159,
+              "line": 163,
               "column": 12
             },
             "end": {
-              "line": 162,
+              "line": 166,
               "column": 13
             }
           },
@@ -760,11 +760,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 166,
+              "line": 170,
               "column": 12
             },
             "end": {
-              "line": 169,
+              "line": 173,
               "column": 13
             }
           },
@@ -782,11 +782,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 173,
+              "line": 177,
               "column": 12
             },
             "end": {
-              "line": 175,
+              "line": 179,
               "column": 13
             }
           },
@@ -803,11 +803,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 179,
+              "line": 183,
               "column": 12
             },
             "end": {
-              "line": 183,
+              "line": 187,
               "column": 13
             }
           },
@@ -826,11 +826,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 187,
+              "line": 191,
               "column": 12
             },
             "end": {
-              "line": 191,
+              "line": 195,
               "column": 13
             }
           },
@@ -849,11 +849,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 195,
+              "line": 199,
               "column": 12
             },
             "end": {
-              "line": 199,
+              "line": 203,
               "column": 13
             }
           },
@@ -872,11 +872,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 203,
+              "line": 207,
               "column": 12
             },
             "end": {
-              "line": 207,
+              "line": 211,
               "column": 13
             }
           },
@@ -895,11 +895,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 211,
+              "line": 215,
               "column": 12
             },
             "end": {
-              "line": 214,
+              "line": 218,
               "column": 13
             }
           },
@@ -917,11 +917,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 218,
+              "line": 222,
               "column": 12
             },
             "end": {
-              "line": 221,
+              "line": 225,
               "column": 13
             }
           },
@@ -939,11 +939,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 225,
+              "line": 229,
               "column": 12
             },
             "end": {
-              "line": 228,
+              "line": 232,
               "column": 13
             }
           },
@@ -961,11 +961,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 233,
+              "line": 237,
               "column": 12
             },
             "end": {
-              "line": 233,
+              "line": 237,
               "column": 27
             }
           },
@@ -982,11 +982,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 237,
+              "line": 241,
               "column": 12
             },
             "end": {
-              "line": 240,
+              "line": 244,
               "column": 13
             }
           },
@@ -1004,11 +1004,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 244,
+              "line": 248,
               "column": 12
             },
             "end": {
-              "line": 247,
+              "line": 251,
               "column": 13
             }
           },
@@ -1026,11 +1026,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 252,
+              "line": 256,
               "column": 12
             },
             "end": {
-              "line": 255,
+              "line": 259,
               "column": 13
             }
           },
@@ -1048,11 +1048,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 259,
+              "line": 263,
               "column": 12
             },
             "end": {
-              "line": 262,
+              "line": 266,
               "column": 13
             }
           },
@@ -1070,11 +1070,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 266,
+              "line": 270,
               "column": 12
             },
             "end": {
-              "line": 269,
+              "line": 273,
               "column": 13
             }
           },
@@ -1092,11 +1092,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 270,
+              "line": 274,
               "column": 12
             },
             "end": {
-              "line": 270,
+              "line": 274,
               "column": 33
             }
           },
@@ -1113,21 +1113,19 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 271,
+              "line": 275,
               "column": 12
             },
             "end": {
               "line": 275,
-              "column": 13
+              "column": 31
             }
           },
           "metadata": {
             "polymer": {
-              "notify": true,
               "attributeType": "String"
             }
-          },
-          "defaultValue": "\"hsl(0,100%,50%)\""
+          }
         },
         {
           "name": "_previousColor",
@@ -1140,38 +1138,15 @@
               "column": 12
             },
             "end": {
-              "line": 279,
-              "column": 13
+              "line": 276,
+              "column": 34
             }
           },
           "metadata": {
             "polymer": {
-              "notify": true,
               "attributeType": "String"
             }
           }
-        },
-        {
-          "name": "_history",
-          "type": "Array | null | undefined",
-          "description": "",
-          "privacy": "protected",
-          "sourceRange": {
-            "start": {
-              "line": 280,
-              "column": 12
-            },
-            "end": {
-              "line": 283,
-              "column": 13
-            }
-          },
-          "metadata": {
-            "polymer": {
-              "attributeType": "Array"
-            }
-          },
-          "defaultValue": "[]"
         },
         {
           "name": "_selectColorButtonColor",
@@ -1180,11 +1155,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 284,
+              "line": 277,
               "column": 12
             },
             "end": {
-              "line": 284,
+              "line": 277,
               "column": 43
             }
           },
@@ -1201,11 +1176,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 285,
+              "line": 278,
               "column": 12
             },
             "end": {
-              "line": 285,
+              "line": 278,
               "column": 42
             }
           },
@@ -1222,33 +1197,12 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 286,
+              "line": 279,
               "column": 12
             },
             "end": {
-              "line": 286,
+              "line": 279,
               "column": 39
-            }
-          },
-          "metadata": {
-            "polymer": {
-              "attributeType": "Object"
-            }
-          }
-        },
-        {
-          "name": "_popUp",
-          "type": "Object | null | undefined",
-          "description": "",
-          "privacy": "protected",
-          "sourceRange": {
-            "start": {
-              "line": 287,
-              "column": 12
-            },
-            "end": {
-              "line": 287,
-              "column": 26
             }
           },
           "metadata": {
@@ -1265,11 +1219,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 318,
+              "line": 308,
               "column": 8
             },
             "end": {
-              "line": 328,
+              "line": 317,
               "column": 9
             }
           },
@@ -2295,11 +2249,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 330,
+              "line": 319,
               "column": 8
             },
             "end": {
-              "line": 332,
+              "line": 321,
               "column": 9
             }
           },
@@ -2312,11 +2266,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 334,
+              "line": 323,
               "column": 8
             },
             "end": {
-              "line": 338,
+              "line": 327,
               "column": 9
             }
           },
@@ -2336,11 +2290,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 340,
+              "line": 329,
               "column": 8
             },
             "end": {
-              "line": 344,
+              "line": 333,
               "column": 9
             }
           },
@@ -2360,11 +2314,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 346,
+              "line": 335,
               "column": 8
             },
             "end": {
-              "line": 359,
+              "line": 348,
               "column": 9
             }
           },
@@ -2380,16 +2334,20 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 361,
+              "line": 350,
               "column": 8
             },
             "end": {
-              "line": 364,
+              "line": 353,
               "column": 9
             }
           },
           "metadata": {},
-          "params": [],
+          "params": [
+            {
+              "name": "e"
+            }
+          ],
           "return": {
             "type": "void"
           }
@@ -2400,16 +2358,20 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 366,
+              "line": 355,
               "column": 8
             },
             "end": {
-              "line": 368,
+              "line": 357,
               "column": 9
             }
           },
           "metadata": {},
-          "params": [],
+          "params": [
+            {
+              "name": "e"
+            }
+          ],
           "return": {
             "type": "void"
           }
@@ -2420,11 +2382,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 370,
+              "line": 359,
               "column": 8
             },
             "end": {
-              "line": 385,
+              "line": 374,
               "column": 9
             }
           },
@@ -2440,11 +2402,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 387,
+              "line": 376,
               "column": 8
             },
             "end": {
-              "line": 398,
+              "line": 387,
               "column": 9
             }
           },
@@ -2464,11 +2426,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 400,
+              "line": 389,
               "column": 8
             },
             "end": {
-              "line": 407,
+              "line": 396,
               "column": 9
             }
           },
@@ -2488,11 +2450,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 409,
+              "line": 398,
               "column": 8
             },
             "end": {
-              "line": 416,
+              "line": 405,
               "column": 9
             }
           },
@@ -2505,11 +2467,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 418,
+              "line": 407,
               "column": 8
             },
             "end": {
-              "line": 433,
+              "line": 422,
               "column": 9
             }
           },
@@ -2522,11 +2484,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 446,
+              "line": 435,
               "column": 8
             },
             "end": {
-              "line": 495,
+              "line": 484,
               "column": 9
             }
           },
@@ -2643,11 +2605,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 435,
+              "line": 424,
               "column": 8
             },
             "end": {
-              "line": 444,
+              "line": 433,
               "column": 9
             }
           },
@@ -2668,11 +2630,11 @@
       "metadata": {},
       "sourceRange": {
         "start": {
-          "line": 144,
+          "line": 148,
           "column": 6
         },
         "end": {
-          "line": 496,
+          "line": 485,
           "column": 7
         }
       },
@@ -3099,11 +3061,11 @@
           "description": "The label to show on the button to select a color in the color picker popup.",
           "sourceRange": {
             "start": {
-              "line": 159,
+              "line": 163,
               "column": 12
             },
             "end": {
-              "line": 162,
+              "line": 166,
               "column": 13
             }
           },
@@ -3115,11 +3077,11 @@
           "description": "The label to show on the button to cancel/close the color picker popup.",
           "sourceRange": {
             "start": {
-              "line": 166,
+              "line": 170,
               "column": 12
             },
             "end": {
-              "line": 169,
+              "line": 173,
               "column": 13
             }
           },
@@ -3131,11 +3093,11 @@
           "description": "Media query used to enable native input.",
           "sourceRange": {
             "start": {
-              "line": 173,
+              "line": 177,
               "column": 12
             },
             "end": {
-              "line": 175,
+              "line": 179,
               "column": 13
             }
           },
@@ -3147,11 +3109,11 @@
           "description": "Set to true to disable **hex** input.",
           "sourceRange": {
             "start": {
-              "line": 179,
+              "line": 183,
               "column": 12
             },
             "end": {
-              "line": 183,
+              "line": 187,
               "column": 13
             }
           },
@@ -3163,11 +3125,11 @@
           "description": "Set to true to disable **rgb** input.",
           "sourceRange": {
             "start": {
-              "line": 187,
+              "line": 191,
               "column": 12
             },
             "end": {
-              "line": 191,
+              "line": 195,
               "column": 13
             }
           },
@@ -3179,11 +3141,11 @@
           "description": "Set to true to disable **hsl** input.",
           "sourceRange": {
             "start": {
-              "line": 195,
+              "line": 199,
               "column": 12
             },
             "end": {
-              "line": 199,
+              "line": 203,
               "column": 13
             }
           },
@@ -3195,11 +3157,11 @@
           "description": "Set to true to disable **alpha** input and **alpha** slider.",
           "sourceRange": {
             "start": {
-              "line": 203,
+              "line": 207,
               "column": 12
             },
             "end": {
-              "line": 207,
+              "line": 211,
               "column": 13
             }
           },
@@ -3211,11 +3173,11 @@
           "description": "Set to true to have all inputs visible all the time instead of having a switch button.",
           "sourceRange": {
             "start": {
-              "line": 211,
+              "line": 215,
               "column": 12
             },
             "end": {
-              "line": 214,
+              "line": 218,
               "column": 13
             }
           },
@@ -3227,11 +3189,11 @@
           "description": "Set to true to have all palettes visible all the time instead of having a switch button.",
           "sourceRange": {
             "start": {
-              "line": 218,
+              "line": 222,
               "column": 12
             },
             "end": {
-              "line": 221,
+              "line": 225,
               "column": 13
             }
           },
@@ -3243,11 +3205,11 @@
           "description": "The format that the user used last as input or by switching inputs. One of `hex`,`rgb`,`hsl`.",
           "sourceRange": {
             "start": {
-              "line": 225,
+              "line": 229,
               "column": 12
             },
             "end": {
-              "line": 228,
+              "line": 232,
               "column": 13
             }
           },
@@ -3259,11 +3221,11 @@
           "description": "The palettes to be shown. Should be an Array of Arrays, whereas the inner Arrays should contain valid\nCSS color codes or CSS Custom Properties.",
           "sourceRange": {
             "start": {
-              "line": 233,
+              "line": 237,
               "column": 12
             },
             "end": {
-              "line": 233,
+              "line": 237,
               "column": 27
             }
           },
@@ -3275,11 +3237,11 @@
           "description": "The precision step to use for alpha values.",
           "sourceRange": {
             "start": {
-              "line": 237,
+              "line": 241,
               "column": 12
             },
             "end": {
-              "line": 240,
+              "line": 244,
               "column": 13
             }
           },
@@ -3291,11 +3253,11 @@
           "description": "The precision step to use for hsl values.",
           "sourceRange": {
             "start": {
-              "line": 244,
+              "line": 248,
               "column": 12
             },
             "end": {
-              "line": 247,
+              "line": 251,
               "column": 13
             }
           },
@@ -3307,11 +3269,11 @@
           "description": "Set to true to enable the history for selected colors. If the history is enabled it is not possible to\nuse palettes as they are internally used for the history.",
           "sourceRange": {
             "start": {
-              "line": 252,
+              "line": 256,
               "column": 12
             },
             "end": {
-              "line": 255,
+              "line": 259,
               "column": 13
             }
           },
@@ -3323,11 +3285,11 @@
           "description": "The maximum amount of colors to be stored in the history.",
           "sourceRange": {
             "start": {
-              "line": 259,
+              "line": 263,
               "column": 12
             },
             "end": {
-              "line": 262,
+              "line": 266,
               "column": 13
             }
           },
@@ -3339,11 +3301,11 @@
           "description": "Set to true to be able to use CSS Custom Properties as input value.",
           "sourceRange": {
             "start": {
-              "line": 266,
+              "line": 270,
               "column": 12
             },
             "end": {
-              "line": 269,
+              "line": 273,
               "column": 13
             }
           },
