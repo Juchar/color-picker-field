@@ -123,7 +123,7 @@
         </template>
         <iron-media-query query="[[nativeInputMediaQuery]]" query-matches="{{_nativeInput}}"></iron-media-query>
         <div part="select-color-button-color"></div>
-        <iron-icon id="select-color-button-icon" icon="vaadin:paintbrush" part="select-color-button-icon"></iron-icon>
+        <iron-icon id="select-color-button-icon" icon="[[hoverIcon]]" part="select-color-button-icon"></iron-icon>
       </vaadin-context-menu>
       <input part="native-input" type="color" value="{{value::change}}" native-input$="[[_nativeInput]]">
     </span>
@@ -175,6 +175,13 @@
             labelCancel: {
               type: String,
               value: 'Cancel'
+            },
+            /**
+             * The icon that is shown if hovering the color button.
+             */
+            hoverIcon: {
+              type: String,
+              value: 'vaadin:paintbrush'
             },
             /**
              * Media query used to enable native input.
