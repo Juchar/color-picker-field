@@ -26,6 +26,8 @@
     <vaadin-demo-snippet id="color-picker-field-basic-color-picker" when-defined="color-picker-field">
       <template preserve-content>
         <color-picker-field value="#00b4f0"></color-picker-field>
+        <color-picker-field value="#00b4f0" disabled></color-picker-field>
+        <color-picker-field value="#00b4f0" readonly></color-picker-field>
       </template>
     </vaadin-demo-snippet>
     <div class="warning">
@@ -77,6 +79,15 @@
     <vaadin-demo-snippet id="color-picker-field-styling" when-defined="color-picker-field">
       <template preserve-content>
         <color-picker-field value="#00b4f0" theme="no-input"></color-picker-field>
+      </template>
+    </vaadin-demo-snippet>
+
+    <h3>Inherited Textfield Functionality</h3>
+    <p>You can use all functionalities that <code>vaadin-text-field</code> provides as the color picker is an extension
+      of it.</p>
+    <vaadin-demo-snippet id="color-picker-text-field" when-defined="color-picker-field">
+      <template preserve-content>
+        <color-picker-field value="#00b4f0" label="Pick Color" clear-button-visible></color-picker-field>
       </template>
     </vaadin-demo-snippet>
   </template>

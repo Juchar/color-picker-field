@@ -51,6 +51,10 @@
         pointer-events: none;
       }
 
+      :host([readonly]) [part="switch-format-button"] {
+        display: none;
+      }
+
       [part="select-color-button-icon"] {
         position: absolute;
         top: 50%;
