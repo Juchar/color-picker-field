@@ -6,7 +6,7 @@
 <link href="../../vaadin-button/src/vaadin-button.html" rel="import">
 <link href="../../vaadin-context-menu/src/vaadin-context-menu.html" rel="import">
 <link href="../../color-picker/src/color-picker.html" rel="import">
-<link href="../../color-picker/src/libraries/chroma-js-import.html" rel="import">
+<link href="../../color-picker/src/libraries/tinycolor-import.html" rel="import">
 <link href="../../color-picker/src/utils/color-picker-utils.html" rel="import">
 
 <dom-module id="color-picker-field-template">
@@ -100,7 +100,7 @@
     </style>
 
     <span part="select-color-button">
-      <vaadin-context-menu open-on="click" close-on="_closeColorPickerPopUp" theme="color-picker-field-overlay">
+      <vaadin-context-menu close-on="_closeColorPickerPopUp" open-on="click" theme="color-picker-field-overlay">
         <template>
           <div part="popup-content">
           <color-picker disable-alpha="[[disableAlpha]]" disable-hex="[[disableHex]]" disable-hsl="[[disableHsl]]"
@@ -123,9 +123,9 @@
         </template>
         <iron-media-query query="[[nativeInputMediaQuery]]" query-matches="{{_nativeInput}}"></iron-media-query>
         <div part="select-color-button-color"></div>
-        <iron-icon id="select-color-button-icon" icon="[[hoverIcon]]" part="select-color-button-icon"></iron-icon>
+        <iron-icon icon="[[hoverIcon]]" id="select-color-button-icon" part="select-color-button-icon"></iron-icon>
       </vaadin-context-menu>
-      <input part="native-input" type="color" value="{{value::change}}" native-input$="[[_nativeInput]]">
+      <input native-input$="[[_nativeInput]]" part="native-input" type="color" value="{{value::change}}">
     </span>
     <iron-icon hidden$="[[!_showChangeFormatButton(disableHex,disableRgb,disableHsl)]]" icon="vaadin:sort"
                on-click="_nextFormat"
@@ -157,7 +157,7 @@
         }
 
         static get version() {
-          return '0.1.0';
+          return '0.2.0';
         }
 
         static get properties() {
@@ -387,20 +387,20 @@
 
         _updateSelectedColor(color) {
           if (this._selectColorButtonColor) {
-            this._selectColorButtonColor.style.background = color.css();
+            this._selectColorButtonColor.style.background = color.toHslString();
           }
 
           if (this._selectColorButtonIcon) {
             this._selectColorButtonIcon.style.color = ColorPickerUtils.getContrastColor(color);
           }
 
-          this._popUpColor = color.css();
-          this._previousColor = color.css();
+          this._popUpColor = color.toHslString();
+          this._previousColor = color.toHslString();
         }
 
         _updateHistory(color) {
           if (this.enableHistory) {
-            const newColor = color.css();
+            const newColor = color.toHslString();
             this.palettes = [(this.palettes
               ? [newColor, ...this.palettes[0].filter(v => v !== newColor)].slice(0, this.maxHistory)
               : [newColor])];
@@ -408,12 +408,9 @@
         }
 
         _getResolvedColor() {
-          if (this.enableCssCustomProperties && /--[a-zA-Z0-9]+[a-zA-Z0-9-]*/gm.test(this.value)) {
-            const propertyValue = window.getComputedStyle(this).getPropertyValue(this.value).trim();
-            return propertyValue !== '' ? chroma(propertyValue) : undefined;
-          } else {
-            return chroma(this.value);
-          }
+          return this.enableCssCustomProperties
+            ? ColorPickerUtils.getResolvedValue(this, this.value)
+            : tinycolor(this.value);
         }
 
         _getEnabledFormats() {
@@ -448,7 +445,7 @@
           const patterns = [];
 
           if (!this.disableHex) {
-            patterns.push('#([0-9a-fA-F]{2}){3}');
+            patterns.push('#([0-9a-fA-F]{2}){2,3}');
             patterns.push('#[0-9a-fA-F]{3}');
 
             if (!this.disableAlpha) {

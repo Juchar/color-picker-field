@@ -11,7 +11,7 @@ Color picker field is a themable Web Component providing the possibility to sele
 ```
 
 ## Credits
-Huge thanks also goes to the developers of [Choma.js](https://github.com/gka/chroma.js) that is used for the internal color handling, released under the [BSD license](http://opensource.org/licenses/BSD-3-Clause).
+Huge credits also go to the developers of [TinyColor](https://github.com/bgrins/TinyColor) that is used for the internal color handling, released under the [MIT license](https://opensource.org/licenses/MIT).
 
 ## License
 Apache License 2.0
