@@ -290,6 +290,13 @@
               type: Boolean,
               value: false
             },
+            /**
+             * Set to true to show the button to change color formats.
+             */
+            showChangeFormatButton: {
+              type: Boolean,
+              value: false
+            },
             _nativeInput: Boolean,
             _popUpColor: String,
             _previousColor: String,
@@ -339,7 +346,7 @@
         }
 
         _showChangeFormatButton() {
-          return this._getEnabledFormats().length > 1;
+          return this._getEnabledFormats().length > 1 && this.showChangeFormatButton;
         }
 
         _changeFormatButtonMouseDown(e) {
