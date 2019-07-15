@@ -100,10 +100,12 @@
     </style>
 
     <span part="select-color-button">
-      <vaadin-context-menu close-on="_closeColorPickerPopUp" open-on="click" theme="color-picker-field-overlay">
+      <vaadin-context-menu close-on="_closeColorPickerPopUp" open-on="click"
+                           theme="color-picker-field-overlay">
         <template>
           <div part="popup-content">
-          <color-picker disable-alpha="[[disableAlpha]]" disable-hex="[[disableHex]]" disable-hsl="[[disableHsl]]"
+          <color-picker disable-alpha="[[disableAlpha]]" disable-hex="[[disableHex]]"
+                        disable-hsl="[[disableHsl]]"
                         disable-rgb="[[disableRgb]]"
                         last-used-format="{{lastUsedFormat}}"
                         palettes="[[palettes]]"
@@ -115,19 +117,24 @@
                         theme$="[[theme]]"
                         value="{{_popUpColor}}"></color-picker>
           <div part="footer">
-            <vaadin-button on-click="_cancelPopUp" part="cancel" theme$="[[theme]]">{{labelCancel}}</vaadin-button>
+            <vaadin-button on-click="_cancelPopUp" part="cancel"
+                           theme$="[[theme]]">{{labelCancel}}</vaadin-button>
             <vaadin-button on-click="_selectPopUpColor" part="submit" theme$="primary [[theme]]">{{labelSelect}}
             </vaadin-button>
           </div>
         </div>
         </template>
-        <iron-media-query query="[[nativeInputMediaQuery]]" query-matches="{{_nativeInput}}"></iron-media-query>
+        <iron-media-query query="[[nativeInputMediaQuery]]"
+                          query-matches="{{_nativeInput}}"></iron-media-query>
         <div part="select-color-button-color"></div>
-        <iron-icon icon="[[hoverIcon]]" id="select-color-button-icon" part="select-color-button-icon"></iron-icon>
+        <iron-icon icon="[[hoverIcon]]" id="select-color-button-icon"
+                   part="select-color-button-icon"></iron-icon>
       </vaadin-context-menu>
-      <input native-input$="[[_nativeInput]]" part="native-input" type="color" value="{{value::change}}">
+      <input native-input$="[[_nativeInput]]" part="native-input" type="color"
+             value="{{value::change}}">
     </span>
-    <iron-icon hidden$="[[!_showChangeFormatButton(disableHex,disableRgb,disableHsl)]]" icon="vaadin:sort"
+    <iron-icon hidden$="[[!_showChangeFormatButton(disableHex,disableRgb,disableHsl)]]"
+               icon="vaadin:sort"
                on-click="_nextFormat"
                on-mousedown="_changeFormatButtonMouseDown"
                on-touchend="_changeFormatButtonTouchend"
@@ -135,7 +142,7 @@
   </template>
 
   <script>
-    (function() {
+    (function () {
       let memoizedTemplate;
 
       /**
@@ -157,7 +164,7 @@
         }
 
         static get version() {
-          return '0.2.0';
+          return '0.2.1';
         }
 
         static get properties() {
@@ -298,7 +305,8 @@
 
             const thisTemplate = Polymer.DomModule.import(this.is + '-template', 'template');
             const colorButton = thisTemplate.content.querySelector('[part="select-color-button"]');
-            const switchFormatButton = thisTemplate.content.querySelector('[part="switch-format-button"]');
+            const switchFormatButton = thisTemplate.content.querySelector(
+                '[part="switch-format-button"]');
             const styles = thisTemplate.content.querySelector('style');
             const inputField = memoizedTemplate.content.querySelector('[part="input-field"]');
             const prefixSlot = memoizedTemplate.content.querySelector('[name="prefix"]');
@@ -320,8 +328,10 @@
         ready() {
           super.ready();
 
-          this._selectColorButtonIcon = this.shadowRoot.querySelector('[part="select-color-button-icon"]');
-          this._selectColorButtonColor = this.shadowRoot.querySelector('[part="select-color-button-color"]');
+          this._selectColorButtonIcon = this.shadowRoot.querySelector(
+              '[part="select-color-button-icon"]');
+          this._selectColorButtonColor = this.shadowRoot.querySelector(
+              '[part="select-color-button-color"]');
           this._changeFormatButton = this.shadowRoot.querySelector('[part="switch-format-button"]');
 
           this._createPropertyObserver('value', '_updateOnValueChange', true);
@@ -341,7 +351,6 @@
         _changeFormatButtonTouchend(e) {
           e.preventDefault();
           this._nextFormat();
-          this.inputElement.focus();
         }
 
         _nextFormat() {
@@ -351,10 +360,11 @@
           const format = ColorPickerField._getColorFormat(this.value);
           const nextFormat = allFormats[(allFormats.indexOf(format) + 1) % allFormats.length];
           const resolvedColor = this._getResolvedColor();
-          const resolution = this['step' + nextFormat.charAt(0).toUpperCase() + nextFormat.slice(1)] || 1;
+          const resolution = this['step' + nextFormat.charAt(0).toUpperCase() + nextFormat.slice(1)]
+              || 1;
 
-          this.value = ColorPickerUtils.getFormattedColor(resolvedColor, nextFormat, this.stepAlpha, resolution)
-            .replace(/,/g, ', ');
+          this.value = ColorPickerUtils.getFormattedColor(resolvedColor, nextFormat,
+              this.stepAlpha, resolution).replace(/,/g, ', ');
 
           this.inputElement.focus();
         }
@@ -362,6 +372,7 @@
         _selectPopUpColor(e) {
           this._cancelPopUp(e);
           this.value = this._popUpColor.replace(/,/g, ', ');
+          this.dispatchEvent(new CustomEvent('change', {bubbles: true}));
         }
 
         _cancelPopUp(e) {
@@ -402,15 +413,16 @@
           if (this.enableHistory) {
             const newColor = color.toHslString();
             this.palettes = [(this.palettes
-              ? [newColor, ...this.palettes[0].filter(v => v !== newColor)].slice(0, this.maxHistory)
-              : [newColor])];
+                ? [newColor, ...this.palettes[0].filter(v => v !== newColor)]
+                .slice(0, this.maxHistory)
+                : [newColor])];
           }
         }
 
         _getResolvedColor() {
           return this.enableCssCustomProperties
-            ? ColorPickerUtils.getResolvedValue(this, this.value)
-            : tinycolor(this.value);
+              ? ColorPickerUtils.getResolvedValue(this, this.value)
+              : tinycolor(this.value);
         }
 
         _getEnabledFormats() {
@@ -478,10 +490,12 @@
             const decimalPlacesHsl = countDecimalPlaces(this.stepHsl);
             const decimalHsl = decimalRegex(decimalPlacesHsl);
 
-            patterns.push(`hsl\\((-?\\d+${decimalHsl}\\s*,\\s*)(-?\\d+${decimalHsl}%\\s*,\\s*)(-?\\d+${decimalHsl}%\\s*)\\)`);
+            patterns.push(
+                `hsl\\((-?\\d+${decimalHsl}\\s*,\\s*)(-?\\d+${decimalHsl}%\\s*,\\s*)(-?\\d+${decimalHsl}%\\s*)\\)`);
 
             if (!this.disableAlpha) {
-              patterns.push(`hsla\\((-?\\d+${decimalHsl}\\s*,\\s*)(-?\\d+${decimalHsl}%\\s*,\\s*){2}(-?\\d+${decimalAlpha}\\s*)\\)`);
+              patterns.push(
+                  `hsla\\((-?\\d+${decimalHsl}\\s*,\\s*)(-?\\d+${decimalHsl}%\\s*,\\s*){2}(-?\\d+${decimalAlpha}\\s*)\\)`);
             }
           }
 
