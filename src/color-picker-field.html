@@ -164,7 +164,7 @@
         }
 
         static get version() {
-          return '0.2.1';
+          return '0.2.2';
         }
 
         static get properties() {
@@ -372,6 +372,7 @@
 
           this.value = ColorPickerUtils.getFormattedColor(resolvedColor, nextFormat,
               this.stepAlpha, resolution).replace(/,/g, ', ');
+          this.dispatchEvent(new CustomEvent('change', {bubbles: true}));
 
           this.inputElement.focus();
         }
