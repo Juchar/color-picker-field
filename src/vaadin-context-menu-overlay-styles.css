@@ -1,0 +1,3 @@
+:host([theme~="color-picker-field-overlay"]) [part="overlay"] {
+  max-height: unset;
+}

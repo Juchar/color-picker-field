@@ -1,6 +1,6 @@
 {
   "name": "@juchar/color-picker-field",
-  "version": "0.2.3",
+  "version": "2.0.0.alpha1",
   "description": "color-picker-field",
   "main": "color-picker-field.html",
   "repository": "juchar/color-picker-field",
@@ -42,9 +42,12 @@
     "@vaadin/vaadin-component-dev-dependencies": "^3.0.0"
   },
   "dependencies": {
-    "@vaadin/vaadin-button": "^2.2.0",
+    "@polymer/polymer": "^3.3.0",
+    "@vaadin/vaadin-button": "^2.2.1",
+    "@vaadin/vaadin-context-menu": "^4.3.12",
     "@vaadin/vaadin-icons": "^4.3.1",
     "@vaadin/vaadin-tabs": "^3.0.0",
-    "@vaadin/vaadin-text-field": "^2.4.4"
+    "@vaadin/vaadin-text-field": "^2.4.11",
+    "@vaadin/vaadin-themable-mixin": "^1.4.4"
   }
 }
