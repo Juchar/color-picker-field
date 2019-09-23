@@ -1,32 +1,28 @@
-import {html} from '@polymer/polymer/polymer-element.js';
+import {html} from '@polymer/polymer';
+import '@appreciated/color-picker/color-picker.js';
+import ColorPickerUtils from '@appreciated/color-picker/src/utils/color-picker-utils';
 import '@polymer/iron-media-query/iron-media-query.js';
 import '@polymer/iron-icon/iron-icon.js';
 import {TextFieldElement} from '@vaadin/vaadin-text-field/src/vaadin-text-field.js';
 import '@vaadin/vaadin-button/src/vaadin-button.js';
 import '@vaadin/vaadin-context-menu/src/vaadin-context-menu.js';
-import '@juchar/color-picker/src/color-picker.js';
 import 'tinycolor2';
-import '@juchar/color-picker/src/utils/color-picker-utils.js';
-import {DomModule} from '@polymer/polymer/lib/elements/dom-module';
 
 let memoizedTemplate;
 
 /**
- * ` < color - picker - field > ` allows to select a color using sliders, inputs or palettes.
+ * `<color-picker-field>` allows to select a color using sliders, inputs or palettes.
  *
  * ```
  * <color-picker-field></color-picker-field>
  * ```
- *
- * @memberof Vaadin.ColorPicker
- * @mixes ElementMixin
- * @mixes ThemableMixin
+ * @memberof global
  * @demo demo/index.html
  */
 
 class ColorPickerField extends TextFieldElement {
   static get template() {
-    var template = html`
+    const template = html`
     <style>
       [part="select-color-button"] {
         overflow: hidden;
@@ -158,7 +154,7 @@ class ColorPickerField extends TextFieldElement {
     if (!memoizedTemplate) {
       memoizedTemplate = template.cloneNode(true);
 
-      const thisTemplate = DomModule.import(this.is + '-template', 'template');
+      const thisTemplate = template.import(this.is + '-template', 'template');
       const colorButton = thisTemplate.content.querySelector('[part="select-color-button"]');
       const switchFormatButton = thisTemplate.content.querySelector(
         '[part="switch-format-button"]');

@@ -19,7 +19,6 @@
   "globals": {
     "Polymer": false,
     "Vaadin": false,
-    "tinycolor": false,
-    "ColorPickerUtils": false
+    "tinycolor": false
   }
 }

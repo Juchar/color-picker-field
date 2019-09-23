@@ -15,7 +15,7 @@
 <custom-element-demo>
   <template>
     <script src="../webcomponentsjs/webcomponents-lite.js"></script>
-    <link rel="import" href="color-picker.html">
+    <link rel="import" href="color-picker-field.js">
     <next-code-block></next-code-block>
   </template>
 </custom-element-demo>
