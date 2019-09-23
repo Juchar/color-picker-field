@@ -1,13 +1,13 @@
-import {PolymerElement,Polymer, html} from '@polymer/polymer/polymer-element.js';
+import {html} from '@polymer/polymer/polymer-element.js';
 import "@polymer/iron-media-query/iron-media-query.js";
-import {ElementMixin} from "@vaadin/vaadin-themable-mixin/vaadin-themable-mixin.js";
-import "@vaadin/vaadin-element-mixin/vaadin-element-mixin.js";
+import "@polymer/iron-icon/iron-icon.js";
 import {TextFieldElement} from "@vaadin/vaadin-text-field/src/vaadin-text-field.js";
-import {ButtonElement} from "@vaadin/vaadin-button/src/vaadin-button.js";
-import {ContextMenuElement} from  "@vaadin/vaadin-context-menu/src/vaadin-context-menu.js";
-import "/color-picker/src/color-picker.js";
-import "/color-picker/src/libraries/tinycolor-import.js";
-import "/color-picker/src/utils/color-picker-utils.js";
+import "@vaadin/vaadin-button/src/vaadin-button.js";
+import "@vaadin/vaadin-context-menu/src/vaadin-context-menu.js";
+import "@juchar/color-picker/src/color-picker.js";
+import "@juchar/color-picker/src/libraries/tinycolor-import.js";
+import "@juchar/color-picker/src/utils/color-picker-utils.js";
+import {DomModule} from "@polymer/polymer/lib/elements/dom-module";
 
 let memoizedTemplate;
 
@@ -19,8 +19,8 @@ let memoizedTemplate;
  * ```
  *
  * @memberof Vaadin.ColorPicker
- * @mixes Vaadin.ElementMixin
- * @mixes Vaadin.ThemableMixin
+ * @mixes ElementMixin
+ * @mixes ThemableMixin
  * @demo demo/index.html
  */
 
@@ -140,11 +140,9 @@ class ColorPickerField extends TextFieldElement {
           </div>
         </div>
         </template>
-        <iron-media-query query="[[nativeInputMediaQuery]]"
-                          query-matches="{{_nativeInput}}"></iron-media-query>
+        <iron-media-query query="[[nativeInputMediaQuery]]" query-matches="{{_nativeInput}}"></iron-media-query>
         <div part="select-color-button-color"></div>
-        <iron-icon icon="[[hoverIcon]]" id="select-color-button-icon"
-                   part="select-color-button-icon"></iron-icon>
+        <iron-icon icon="[[hoverIcon]]" id="select-color-button-icon" part="select-color-button-icon"></iron-icon>
       </vaadin-context-menu>
       <input native-input$="[[_nativeInput]]" part="native-input" type="color"
              value="{{value::change}}">
@@ -163,7 +161,7 @@ class ColorPickerField extends TextFieldElement {
   }
 
   static get version() {
-    return '0.2.3';
+    return '2.0.0-alpha.1';
   }
 
   static get properties() {
@@ -309,7 +307,7 @@ class ColorPickerField extends TextFieldElement {
     if (!memoizedTemplate) {
       memoizedTemplate = super.template.cloneNode(true);
 
-      const thisTemplate = Polymer.DomModule.import(this.is + '-template', 'template');
+      const thisTemplate = DomModule.import(this.is + '-template', 'template');
       const colorButton = thisTemplate.content.querySelector('[part="select-color-button"]');
       const switchFormatButton = thisTemplate.content.querySelector(
         '[part="switch-format-button"]');
@@ -514,4 +512,5 @@ class ColorPickerField extends TextFieldElement {
   }
 
 }
+
 customElements.define(ColorPickerField.is, ColorPickerField);

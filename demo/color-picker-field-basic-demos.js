@@ -1,5 +1,12 @@
-<dom-module id="color-picker-field-basic-demos">
-  <template>
+import {html, PolymerElement} from "@polymer/polymer";
+
+class ColorPickerFieldBasicDemos extends DemoReadyEventEmitter(ColorPickerFieldDemo(PolymerElement)) {
+  static get is() {
+    return 'color-picker-field-basic-demos';
+  }
+
+  static get template() {
+    return html`
     <style include="vaadin-component-demo-shared-styles">
       :host {
         display: block;
@@ -83,14 +90,8 @@
         <color-picker-field value="#00b4f0" enable-history max-history="10"></color-picker-field>
       </template>
     </vaadin-demo-snippet>
-  </template>
-  <script>
-    class ColorPickerFieldBasicDemos extends DemoReadyEventEmitter(ColorPickerFieldDemo(Polymer.Element)) {
-      static get is() {
-        return 'color-picker-field-basic-demos';
-      }
-    }
+  `;
+  }
+}
 
-    customElements.define(ColorPickerFieldBasicDemos.is, ColorPickerFieldBasicDemos);
-  </script>
-</dom-module>
+customElements.define(ColorPickerFieldBasicDemos.is, ColorPickerFieldBasicDemos);

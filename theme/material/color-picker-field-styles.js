@@ -1,12 +1,14 @@
-<link href="../../../vaadin-material-styles/color.html" rel="import">
-<link href="../../../vaadin-material-styles/shadow.html" rel="import">
-<link href="../../../vaadin-material-styles/typography.html" rel="import">
-<link href="../../../vaadin-text-field/theme/material/vaadin-text-field.html" rel="import">
-<link href="../../../vaadin-icons/vaadin-icons.html" rel="import">
-<link href="../../../vaadin-button/theme/material/vaadin-button.html" rel="import">
-<link href="../../../vaadin-context-menu/theme/material/vaadin-context-menu.html" rel="import">
-<link href="../../../color-picker/theme/material/color-picker.html" rel="import">
+import '../../../vaadin-material-styles/color.js';
+import '../../../vaadin-material-styles/shadow.js';
+import '../../../vaadin-material-styles/typography.js';
+import '../../../vaadin-text-field/theme/material/vaadin-text-field.js';
+import '../../../vaadin-icons/vaadin-icons.js';
+import '../../../vaadin-button/theme/material/vaadin-button.js';
+import '../../../vaadin-context-menu/theme/material/vaadin-context-menu.js';
+import '../../../color-picker/theme/material/color-picker.js';
+import {html} from '@polymer/polymer/lib/utils/html-tag.js';
 
+const $_documentContainer = html`
 <dom-module id="material-color-picker-field" theme-for="color-picker-field">
   <template>
     <style>
@@ -77,3 +79,6 @@
     </style>
   </template>
 </dom-module>
+`;
+
+document.head.appendChild($_documentContainer.content);

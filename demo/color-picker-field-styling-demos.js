@@ -1,5 +1,12 @@
-<dom-module id="color-picker-field-styling-demos">
-  <template>
+import {html, PolymerElement} from "@polymer/polymer";
+
+class ColorPickerFieldStylingDemos extends DemoReadyEventEmitter(ColorPickerFieldDemo(PolymerElement)) {
+  static get is() {
+    return 'color-picker-field-styling-demos';
+  }
+
+  static get template() {
+    return html`
     <style include="vaadin-component-demo-shared-styles">
       :host {
         display: block;
@@ -45,15 +52,9 @@
         <color-picker-field value="#00b4f0" label="Pick Color" clear-button-visible></color-picker-field>
       </template>
     </vaadin-demo-snippet>
+   `;
+  }
+}
 
-  </template>
-  <script>
-    class ColorPickerFieldStylingDemos extends DemoReadyEventEmitter(ColorPickerFieldDemo(Polymer.Element)) {
-      static get is() {
-        return 'color-picker-field-styling-demos';
-      }
-    }
+customElements.define(ColorPickerFieldStylingDemos.is, ColorPickerFieldStylingDemos);
 
-    customElements.define(ColorPickerFieldStylingDemos.is, ColorPickerFieldStylingDemos);
-  </script>
-</dom-module>
