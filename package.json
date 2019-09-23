@@ -50,6 +50,7 @@
     "@vaadin/vaadin-context-menu": "^4.3.12",
     "@vaadin/vaadin-icons": "^4.3.1",
     "@vaadin/vaadin-tabs": "^3.0.4",
+    "tinycolor2": "^1.4.1",
     "@vaadin/vaadin-text-field": "^2.4.11",
     "@vaadin/vaadin-demo-helpers": "^3.0.0",
     "@vaadin/vaadin-themable-mixin": "^1.4.4",

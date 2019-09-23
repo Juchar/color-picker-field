@@ -7,7 +7,8 @@ import "@vaadin/vaadin-text-field/vaadin-text-field.js";
 import "@vaadin/vaadin-icons/vaadin-icons.js";
 import "@vaadin/vaadin-button/vaadin-button.js";
 import "@vaadin/vaadin-context-menu/vaadin-context-menu.js";
-import "../../../color-picker/src/color-picker.js"; //TODO @juchar/color-picker
+import "@polymer/polymer/lib/elements/dom-module";
+import "@juchar/color-picker/src/color-picker.js";
 import {html} from "@polymer/polymer";
 
 const $_documentContainer = html`

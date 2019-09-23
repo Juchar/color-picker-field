@@ -5,7 +5,7 @@ import {TextFieldElement} from "@vaadin/vaadin-text-field/src/vaadin-text-field.
 import "@vaadin/vaadin-button/src/vaadin-button.js";
 import "@vaadin/vaadin-context-menu/src/vaadin-context-menu.js";
 import "@juchar/color-picker/src/color-picker.js";
-import "@juchar/color-picker/src/libraries/tinycolor-import.js";
+import 'tinycolor2';
 import "@juchar/color-picker/src/utils/color-picker-utils.js";
 import {DomModule} from "@polymer/polymer/lib/elements/dom-module";
 
