@@ -1,5 +1,5 @@
-import {html, PolymerElement} from "@polymer/polymer";
-import "@vaadin/vaadin-demo-helpers/vaadin-demo-ready-event-emitter";
+import {html, PolymerElement} from '@polymer/polymer';
+import '@vaadin/vaadin-demo-helpers/vaadin-demo-ready-event-emitter';
 
 class ColorPickerFieldStylingDemos extends window.DemoReadyEventEmitter(ColorPickerFieldDemo(PolymerElement)) {
   static get is() {

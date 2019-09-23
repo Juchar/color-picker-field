@@ -7,7 +7,7 @@
   "description": "color-picker-field",
   "main": [
     "color-picker-field.html",
-    "theme/material/color-picker-field.html"
+    "theme/material/color-picker-field.js"
   ],
   "keywords": [
     "Vaadin",

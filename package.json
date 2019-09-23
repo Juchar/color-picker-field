@@ -32,8 +32,8 @@
     "check:bower": "magi check-bower",
     "check:version": "magi check-version",
     "lint": "npm-run-all --parallel lint:*",
-    "lint:css": "stylelint *.html src/*.html demo/*.html theme/**/*.html",
-    "lint:html": "eslint *.html src demo --ext .html",
+    "lint:css": "stylelint *.js src/*.js demo/*.js theme/**/*.js",
+    "lint:js": "eslint *.js src demo --ext .js",
     "prestart": "polymer analyze > analysis.json",
     "start": "polymer serve --port 3000 --open --npm",
     "preversion": "magi update-version"

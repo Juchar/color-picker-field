@@ -1,15 +1,15 @@
-import "@vaadin/vaadin-lumo-styles/color.js";
-import "@vaadin/vaadin-lumo-styles/sizing.js";
-import "@vaadin/vaadin-lumo-styles/spacing.js";
-import "@vaadin/vaadin-lumo-styles/style.js";
-import "@vaadin/vaadin-lumo-styles/typography.js";
-import "@vaadin/vaadin-text-field/vaadin-text-field.js";
-import "@vaadin/vaadin-icons/vaadin-icons.js";
-import "@vaadin/vaadin-button/vaadin-button.js";
-import "@vaadin/vaadin-context-menu/vaadin-context-menu.js";
-import "@polymer/polymer/lib/elements/dom-module";
-import "@juchar/color-picker/src/color-picker.js";
-import {html} from "@polymer/polymer";
+import '@vaadin/vaadin-lumo-styles/color.js';
+import '@vaadin/vaadin-lumo-styles/sizing.js';
+import '@vaadin/vaadin-lumo-styles/spacing.js';
+import '@vaadin/vaadin-lumo-styles/style.js';
+import '@vaadin/vaadin-lumo-styles/typography.js';
+import '@vaadin/vaadin-text-field/vaadin-text-field.js';
+import '@vaadin/vaadin-icons/vaadin-icons.js';
+import '@vaadin/vaadin-button/vaadin-button.js';
+import '@vaadin/vaadin-context-menu/vaadin-context-menu.js';
+import '@polymer/polymer/lib/elements/dom-module';
+import '@juchar/color-picker/src/color-picker.js';
+import {html} from '@polymer/polymer';
 
 const $_documentContainer = html`
 <dom-module id="lumo-color-picker-field" theme-for="color-picker-field">

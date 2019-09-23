@@ -1,13 +1,13 @@
 import {html} from '@polymer/polymer/polymer-element.js';
-import "@polymer/iron-media-query/iron-media-query.js";
-import "@polymer/iron-icon/iron-icon.js";
-import {TextFieldElement} from "@vaadin/vaadin-text-field/src/vaadin-text-field.js";
-import "@vaadin/vaadin-button/src/vaadin-button.js";
-import "@vaadin/vaadin-context-menu/src/vaadin-context-menu.js";
-import "@juchar/color-picker/src/color-picker.js";
+import '@polymer/iron-media-query/iron-media-query.js';
+import '@polymer/iron-icon/iron-icon.js';
+import {TextFieldElement} from '@vaadin/vaadin-text-field/src/vaadin-text-field.js';
+import '@vaadin/vaadin-button/src/vaadin-button.js';
+import '@vaadin/vaadin-context-menu/src/vaadin-context-menu.js';
+import '@juchar/color-picker/src/color-picker.js';
 import 'tinycolor2';
-import "@juchar/color-picker/src/utils/color-picker-utils.js";
-import {DomModule} from "@polymer/polymer/lib/elements/dom-module";
+import '@juchar/color-picker/src/utils/color-picker-utils.js';
+import {DomModule} from '@polymer/polymer/lib/elements/dom-module';
 
 let memoizedTemplate;
 
@@ -26,7 +26,7 @@ let memoizedTemplate;
 
 class ColorPickerField extends TextFieldElement {
   static get template() {
-    return html`
+    var template = html`
     <style>
       [part="select-color-button"] {
         overflow: hidden;
@@ -154,6 +154,25 @@ class ColorPickerField extends TextFieldElement {
                on-touchend="_changeFormatButtonTouchend"
                part="switch-format-button"></iron-icon>
   `;
+
+    if (!memoizedTemplate) {
+      memoizedTemplate = template.cloneNode(true);
+
+      const thisTemplate = DomModule.import(this.is + '-template', 'template');
+      const colorButton = thisTemplate.content.querySelector('[part="select-color-button"]');
+      const switchFormatButton = thisTemplate.content.querySelector(
+        '[part="switch-format-button"]');
+      const styles = thisTemplate.content.querySelector('style');
+      const inputField = memoizedTemplate.content.querySelector('[part="input-field"]');
+      const prefixSlot = memoizedTemplate.content.querySelector('[name="prefix"]');
+      const suffixSlot = memoizedTemplate.content.querySelector('[name="suffix"]');
+
+      inputField.insertBefore(colorButton, prefixSlot.nextSibling);
+      inputField.insertBefore(switchFormatButton, suffixSlot);
+      memoizedTemplate.content.appendChild(styles);
+    }
+
+    return memoizedTemplate;
   }
 
   static get is() {
@@ -303,27 +322,6 @@ class ColorPickerField extends TextFieldElement {
     };
   }
 
-  static get template() {
-    if (!memoizedTemplate) {
-      memoizedTemplate = super.template.cloneNode(true);
-
-      const thisTemplate = DomModule.import(this.is + '-template', 'template');
-      const colorButton = thisTemplate.content.querySelector('[part="select-color-button"]');
-      const switchFormatButton = thisTemplate.content.querySelector(
-        '[part="switch-format-button"]');
-      const styles = thisTemplate.content.querySelector('style');
-      const inputField = memoizedTemplate.content.querySelector('[part="input-field"]');
-      const prefixSlot = memoizedTemplate.content.querySelector('[name="prefix"]');
-      const suffixSlot = memoizedTemplate.content.querySelector('[name="suffix"]');
-
-      inputField.insertBefore(colorButton, prefixSlot.nextSibling);
-      inputField.insertBefore(switchFormatButton, suffixSlot);
-      memoizedTemplate.content.appendChild(styles);
-    }
-
-    return memoizedTemplate;
-  }
-
   constructor() {
     super();
     this._updateInputPattern();
@@ -418,8 +416,7 @@ class ColorPickerField extends TextFieldElement {
     if (this.enableHistory) {
       const newColor = color.toHslString();
       this.palettes = [(this.palettes
-        ? [newColor, ...this.palettes[0].filter(v => v !== newColor)]
-        .slice(0, this.maxHistory)
+        ? [newColor, ...this.palettes[0].filter(v => v !== newColor)].slice(0, this.maxHistory)
         : [newColor])];
     }
   }

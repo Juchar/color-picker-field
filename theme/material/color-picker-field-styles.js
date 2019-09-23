@@ -6,7 +6,7 @@ import '@vaadin/vaadin-icons/vaadin-icons.js';
 import '@vaadin/vaadin-button/theme/material/vaadin-button.js';
 import '@vaadin/vaadin-context-menu/theme/material/vaadin-context-menu.js';
 import '../../../color-picker/theme/material/color-picker.js';
-import "@polymer/polymer/lib/elements/dom-module";
+import '@polymer/polymer/lib/elements/dom-module';
 import {html} from '@polymer/polymer/lib/utils/html-tag.js';
 
 const $_documentContainer = html`

@@ -4,7 +4,7 @@
     {
       "description": "",
       "summary": "",
-      "path": "src/color-picker-field.js",
+      "path": "./src/color-picker-field.js",
       "properties": [
         {
           "name": "list",

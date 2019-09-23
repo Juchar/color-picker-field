@@ -1,2 +1,2 @@
-import "../../src/color-picker-field.html";
-import "./color-picker-field-styles.html";
+import '../../src/color-picker-field.js';
+import './color-picker-field-styles.js';
