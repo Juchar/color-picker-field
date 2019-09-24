@@ -67,7 +67,7 @@ class ColorPickerFieldBasicDemos extends window.DemoReadyEventEmitter(ColorPicke
         ]'
       </code>
     </p>
-    <vaadin-demo-snippet id="color-picker-field-palettes" when-defined="color-picker-field"
+    <vaadin-demo-snippet id="color-picker-field-palettes" when-defined="color-picker-field">
         <color-picker-field value="#00b4f0" palettes='[
         ["hsl(0,100%,50%)","hsl(60,100%,50%)","hsl(120,100%,50%)","hsl(180,100%,50%)","hsl(240,100%,50%)","hsl(300,100%,50%)"],
         ["hsla(0,100%,50%,0.5)","hsla(60,100%,50%,0.5)","hsla(120,100%,50%,0.5)","hsla(180,100%,50%,0.5)","hsla(240,100%,50%,0.5)","hsla(300,100%,50%,0.5)"]

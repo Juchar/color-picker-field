@@ -1,14 +1,12 @@
-import {html} from '@polymer/polymer';
+import {html, PolymerElement} from '@polymer/polymer';
 import '@appreciated/color-picker/color-picker.js';
 import ColorPickerUtils from '@appreciated/color-picker/src/utils/color-picker-utils';
 import '@polymer/iron-media-query/iron-media-query.js';
 import '@polymer/iron-icon/iron-icon.js';
-import {TextFieldElement} from '@vaadin/vaadin-text-field/src/vaadin-text-field.js';
+import '@vaadin/vaadin-text-field';
 import '@vaadin/vaadin-button/src/vaadin-button.js';
 import '@vaadin/vaadin-context-menu/src/vaadin-context-menu.js';
 import 'tinycolor2';
-
-let memoizedTemplate;
 
 /**
  * `<color-picker-field>` allows to select a color using sliders, inputs or palettes.
@@ -20,14 +18,18 @@ let memoizedTemplate;
  * @demo demo/index.html
  */
 
-class ColorPickerField extends TextFieldElement {
+class ColorPickerField extends PolymerElement {
   static get template() {
-    const template = html`
+    return html`
     <style>
       [part="select-color-button"] {
         overflow: hidden;
         position: relative;
         box-sizing: border-box;
+        flex: none;
+        width: 1.5em;
+        height: 1.5em;
+        line-height: 1;
       }
 
       [part="select-color-button-color"] {
@@ -83,6 +85,10 @@ class ColorPickerField extends TextFieldElement {
         transform: translate(-50%, -50%) scale(1);
         opacity: 1;
       }
+      
+      :host([theme~="color-picker-field-overlay"]) [part="overlay"] {
+        max-height: unset;
+      }
 
       [part="switch-format-button"] {
         padding: 2px;
@@ -109,66 +115,46 @@ class ColorPickerField extends TextFieldElement {
         margin-top: 0;
         margin-bottom: 0;
       }
-    </style>
-
-    <span part="select-color-button">
-      <vaadin-context-menu close-on="_closeColorPickerPopUp" open-on="click"
-                           theme="color-picker-field-overlay">
-        <template>
-          <div part="popup-content">
-          <color-picker disable-alpha="[[disableAlpha]]" disable-hex="[[disableHex]]"
-                        disable-hsl="[[disableHsl]]"
-                        disable-rgb="[[disableRgb]]"
-                        last-used-format="{{lastUsedFormat}}"
-                        palettes="[[palettes]]"
-                        pinned-inputs="[[pinnedInputs]]"
-                        pinned-palettes="[[pinnedPalettes]]"
-                        previous-value="{{_previousColor}}"
-                        step-alpha="[[stepAlpha]]"
-                        step-hsl="[[stepHsl]]"
-                        theme$="[[theme]]"
-                        value="{{_popUpColor}}"></color-picker>
-          <div part="footer">
-            <vaadin-button on-click="_cancelPopUp" part="cancel"
-                           theme$="[[theme]]">{{labelCancel}}</vaadin-button>
-            <vaadin-button on-click="_selectPopUpColor" part="submit" theme$="primary [[theme]]">{{labelSelect}}
-            </vaadin-button>
-          </div>
-        </div>
-        </template>
-        <iron-media-query query="[[nativeInputMediaQuery]]" query-matches="{{_nativeInput}}"></iron-media-query>
-        <div part="select-color-button-color"></div>
-        <iron-icon icon="[[hoverIcon]]" id="select-color-button-icon" part="select-color-button-icon"></iron-icon>
-      </vaadin-context-menu>
-      <input native-input$="[[_nativeInput]]" part="native-input" type="color"
-             value="{{value::change}}">
-    </span>
-    <iron-icon hidden$="[[!_showChangeFormatButton(disableHex,disableRgb,disableHsl)]]"
-               icon="vaadin:sort"
-               on-click="_nextFormat"
-               on-mousedown="_changeFormatButtonMouseDown"
-               on-touchend="_changeFormatButtonTouchend"
-               part="switch-format-button"></iron-icon>
+    </style>  
+    <vaadin-text-field id="text-field">
+      <span part="select-color-button" slot="prefix">
+        <vaadin-context-menu close-on="_closeColorPickerPopUp" open-on="click" theme="color-picker-field-overlay">
+            <template>
+              <div part="popup-content">
+                  <color-picker disable-alpha="[[disableAlpha]]" disable-hex="[[disableHex]]"
+                                disable-hsl="[[disableHsl]]"
+                                disable-rgb="[[disableRgb]]"
+                                last-used-format="{{lastUsedFormat}}"
+                                palettes="[[palettes]]"
+                                pinned-inputs="[[pinnedInputs]]"
+                                pinned-palettes="[[pinnedPalettes]]"
+                                previous-value="{{_previousColor}}"
+                                step-alpha="[[stepAlpha]]"
+                                step-hsl="[[stepHsl]]"
+                                theme$="[[theme]]"
+                                value="{{_popUpColor}}"></color-picker>
+                  <div part="footer">
+                    <vaadin-button on-click="_cancelPopUp" part="cancel"
+                                   theme$="[[theme]]">{{labelCancel}}</vaadin-button>
+                    <vaadin-button on-click="_selectPopUpColor" part="submit" theme$="primary [[theme]]">{{labelSelect}}
+                    </vaadin-button>
+                  </div>
+                </div>
+            </template>
+          <iron-media-query query="[[nativeInputMediaQuery]]" query-matches="{{_nativeInput}}"></iron-media-query>
+          <div part="select-color-button-color"></div>
+          <iron-icon icon="[[hoverIcon]]" id="select-color-button-icon" part="select-color-button-icon"></iron-icon>
+        </vaadin-context-menu>
+        <input native-input$="[[_nativeInput]]" part="native-input" type="color" value="{{value::change}}">
+      </span>
+      <iron-icon slot="suffix" hidden$="[[!_showChangeFormatButton(disableHex,disableRgb,disableHsl)]]"
+                 icon="vaadin:sort"
+                 on-click="_nextFormat"
+                 on-mousedown="_changeFormatButtonMouseDown"
+                 on-touchend="_changeFormatButtonTouchend"
+                 part="switch-format-button"></iron-icon>
+    </vaadin-text-field>
   `;
-
-    if (!memoizedTemplate) {
-      memoizedTemplate = template.cloneNode(true);
-
-      const thisTemplate = template.import(this.is + '-template', 'template');
-      const colorButton = thisTemplate.content.querySelector('[part="select-color-button"]');
-      const switchFormatButton = thisTemplate.content.querySelector(
-        '[part="switch-format-button"]');
-      const styles = thisTemplate.content.querySelector('style');
-      const inputField = memoizedTemplate.content.querySelector('[part="input-field"]');
-      const prefixSlot = memoizedTemplate.content.querySelector('[name="prefix"]');
-      const suffixSlot = memoizedTemplate.content.querySelector('[name="suffix"]');
-
-      inputField.insertBefore(colorButton, prefixSlot.nextSibling);
-      inputField.insertBefore(switchFormatButton, suffixSlot);
-      memoizedTemplate.content.appendChild(styles);
-    }
-
-    return memoizedTemplate;
   }
 
   static get is() {
@@ -325,14 +311,16 @@ class ColorPickerField extends TextFieldElement {
 
   ready() {
     super.ready();
-
-    this._selectColorButtonIcon = this.shadowRoot.querySelector(
-      '[part="select-color-button-icon"]');
-    this._selectColorButtonColor = this.shadowRoot.querySelector(
-      '[part="select-color-button-color"]');
+    this._selectColorButtonIcon = this.shadowRoot.querySelector('[part="select-color-button-icon"]');
+    this._selectColorButtonColor = this.shadowRoot.querySelector('[part="select-color-button-color"]');
     this._changeFormatButton = this.shadowRoot.querySelector('[part="switch-format-button"]');
-
-    this._createPropertyObserver('value', '_updateOnValueChange', true);
+    this._changeFormatButton.addEventListener('click', evt => {
+      this._changeFormatButtonTouchend(evt);
+    });
+    this._textField = this.shadowRoot.querySelector('#text-field');
+    this._inputElement = this._textField.shadowRoot.querySelector('[part="value"]');
+    this._textField.value = this.getAttribute('value');
+    // this._textField._createPropertyObserver('value', this._updateOnValueChange, true);
     this._updateOnValueChange();
   }
 
@@ -352,25 +340,24 @@ class ColorPickerField extends TextFieldElement {
   }
 
   _nextFormat() {
-    this.inputElement.blur();
+    this._inputElement.blur();
 
     const allFormats = this._getEnabledFormats();
-    const format = ColorPickerField._getColorFormat(this.value);
+    const format = ColorPickerField._getColorFormat(this._textField.value);
     const nextFormat = allFormats[(allFormats.indexOf(format) + 1) % allFormats.length];
     const resolvedColor = this._getResolvedColor();
     const resolution = this['step' + nextFormat.charAt(0).toUpperCase() + nextFormat.slice(1)]
       || 1;
 
-    this.value = ColorPickerUtils.getFormattedColor(resolvedColor, nextFormat,
-      this.stepAlpha, resolution).replace(/,/g, ', ');
+    this._textField.value = ColorPickerUtils.getFormattedColor(resolvedColor, nextFormat, this.stepAlpha, resolution).replace(/,/g, ', ');
     this.dispatchEvent(new CustomEvent('change', {bubbles: true}));
 
-    this.inputElement.focus();
+    this._inputElement.focus();
   }
 
   _selectPopUpColor(e) {
     this._cancelPopUp(e);
-    this.value = this._popUpColor.replace(/,/g, ', ');
+    this._textField.value = this._popUpColor.replace(/,/g, ', ');
     this.dispatchEvent(new CustomEvent('change', {bubbles: true}));
   }
 
@@ -378,10 +365,9 @@ class ColorPickerField extends TextFieldElement {
     e.target.dispatchEvent(new CustomEvent('_closeColorPickerPopUp', {composed: true}));
   }
 
-  _updateOnValueChange() {
+  _updateOnValueChange(value) {
     this._changeFormatButton.removeAttribute('disabled');
-
-    const validColor = '' !== this.value.trim() && this.checkValidity();
+    const validColor = '' !== this._textField.value.trim() && this._textField.checkValidity();
     if (validColor) {
       const color = this._getResolvedColor();
       if (color !== undefined) {
@@ -393,6 +379,7 @@ class ColorPickerField extends TextFieldElement {
     } else {
       this._changeFormatButton.setAttribute('disabled', 'disabled');
     }
+    return value;
   }
 
   _updateSelectedColor(color) {
@@ -419,8 +406,8 @@ class ColorPickerField extends TextFieldElement {
 
   _getResolvedColor() {
     return this.enableCssCustomProperties
-      ? ColorPickerUtils.getResolvedValue(this, this.value)
-      : tinycolor(this.value);
+      ? ColorPickerUtils.getResolvedValue(this, this._textField.value)
+      : tinycolor(this._textField.value);
   }
 
   _getEnabledFormats() {

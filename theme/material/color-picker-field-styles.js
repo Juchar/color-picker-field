@@ -7,7 +7,9 @@ import '@vaadin/vaadin-icons/vaadin-icons.js';
 import '@vaadin/vaadin-button/theme/material/vaadin-button.js';
 import '@vaadin/vaadin-context-menu/theme/material/vaadin-context-menu.js';
 
-const $_documentContainer = html`
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `
 <dom-module id="material-color-picker-field" theme-for="color-picker-field">
   <template>
     <style>
@@ -79,5 +81,4 @@ const $_documentContainer = html`
   </template>
 </dom-module>
 `;
-
 document.head.appendChild($_documentContainer.content);

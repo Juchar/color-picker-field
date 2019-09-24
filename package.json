@@ -54,6 +54,6 @@
     "tinycolor2": "^1.4.1",
     "@vaadin/vaadin-text-field": "^2.4.11",
     "@vaadin/vaadin-themable-mixin": "^1.4.4",
-    "@appreciated/color-picker": "^2.0.0-alpha.1"
+    "@appreciated/color-picker": "^2.0.0-alpha.2"
   }
 }
