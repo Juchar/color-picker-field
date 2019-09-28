@@ -1,12 +1,15 @@
-<link href="../../../vaadin-material-styles/color.html" rel="import">
-<link href="../../../vaadin-material-styles/shadow.html" rel="import">
-<link href="../../../vaadin-material-styles/typography.html" rel="import">
-<link href="../../../vaadin-text-field/theme/material/vaadin-text-field.html" rel="import">
-<link href="../../../vaadin-icons/vaadin-icons.html" rel="import">
-<link href="../../../vaadin-button/theme/material/vaadin-button.html" rel="import">
-<link href="../../../vaadin-context-menu/theme/material/vaadin-context-menu.html" rel="import">
-<link href="../../../color-picker/theme/material/color-picker.html" rel="import">
+import {html} from '@polymer/polymer';
+import '@vaadin/vaadin-material-styles/color.js';
+import '@vaadin/vaadin-material-styles/shadow.js';
+import '@vaadin/vaadin-material-styles/typography.js';
+import '@vaadin/vaadin-text-field/theme/material/vaadin-text-field.js';
+import '@vaadin/vaadin-icons/vaadin-icons.js';
+import '@vaadin/vaadin-button/theme/material/vaadin-button.js';
+import '@vaadin/vaadin-context-menu/theme/material/vaadin-context-menu.js';
 
+const $_documentContainer = document.createElement('template');
+
+$_documentContainer.innerHTML = `
 <dom-module id="material-color-picker-field" theme-for="color-picker-field">
   <template>
     <style>
@@ -77,3 +80,24 @@
     </style>
   </template>
 </dom-module>
+`;
+document.head.appendChild($_documentContainer.content);
+
+const $_documentContainer2 = document.createElement('template');
+
+$_documentContainer2.innerHTML = `
+<dom-module id="color-picker-field-overlay" theme-for="vaadin-context-menu-overlay">
+  <template>
+    <style>
+      :host([theme~="color-picker-field-overlay"]) [part="overlay"] {
+        max-height: unset;
+        overflow: hidden;
+      }
+      :host([theme~="color-picker-field-overlay"]) [part="content"] {
+        padding: unset;
+      }
+    </style>
+  </template>
+</dom-module>
+  `;
+document.head.appendChild($_documentContainer2.content);

@@ -1,5 +1,13 @@
-<dom-module id="color-picker-field-basic-demos">
-  <template>
+import {html, PolymerElement} from '@polymer/polymer';
+import '@vaadin/vaadin-demo-helpers/vaadin-demo-ready-event-emitter';
+
+class ColorPickerFieldBasicDemos extends window.DemoReadyEventEmitter(ColorPickerFieldDemo(PolymerElement)) {
+  static get is() {
+    return 'color-picker-field-basic-demos';
+  }
+
+  static get template() {
+    return html`
     <style include="vaadin-component-demo-shared-styles">
       :host {
         display: block;
@@ -24,12 +32,10 @@
     <p>Click the arrows to switch between <b>hex</b>, <b>rgb</b> and <b>hsl</b>. Click the color to use a color picker
       inside a popup.</p>
     <vaadin-demo-snippet id="color-picker-field-basic-color-picker" when-defined="color-picker-field">
-      <template preserve-content>
         <color-picker-field value="#00b4f0"></color-picker-field>
         <color-picker-field value="#00b4f0" show-change-format-button></color-picker-field>
         <color-picker-field value="#00b4f0" disabled></color-picker-field>
         <color-picker-field value="#00b4f0" readonly></color-picker-field>
-      </template>
     </vaadin-demo-snippet>
 
     <h3>Palettes</h3>
@@ -62,12 +68,10 @@
       </code>
     </p>
     <vaadin-demo-snippet id="color-picker-field-palettes" when-defined="color-picker-field">
-      <template preserve-content>
         <color-picker-field value="#00b4f0" palettes='[
         ["hsl(0,100%,50%)","hsl(60,100%,50%)","hsl(120,100%,50%)","hsl(180,100%,50%)","hsl(240,100%,50%)","hsl(300,100%,50%)"],
         ["hsla(0,100%,50%,0.5)","hsla(60,100%,50%,0.5)","hsla(120,100%,50%,0.5)","hsla(180,100%,50%,0.5)","hsla(240,100%,50%,0.5)","hsla(300,100%,50%,0.5)"]
         ]'></color-picker-field>
-      </template>
     </vaadin-demo-snippet>
 
     <h3>History</h3>
@@ -79,18 +83,10 @@
       history.
     </p>
     <vaadin-demo-snippet id="color-picker-field-history" when-defined="color-picker-field">
-      <template preserve-content>
         <color-picker-field value="#00b4f0" enable-history max-history="10"></color-picker-field>
-      </template>
     </vaadin-demo-snippet>
-  </template>
-  <script>
-    class ColorPickerFieldBasicDemos extends DemoReadyEventEmitter(ColorPickerFieldDemo(Polymer.Element)) {
-      static get is() {
-        return 'color-picker-field-basic-demos';
-      }
-    }
+  `;
+  }
+}
 
-    customElements.define(ColorPickerFieldBasicDemos.is, ColorPickerFieldBasicDemos);
-  </script>
-</dom-module>
+customElements.define(ColorPickerFieldBasicDemos.is, ColorPickerFieldBasicDemos);

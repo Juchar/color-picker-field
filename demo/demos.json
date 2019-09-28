@@ -4,7 +4,7 @@
     {
       "name": "Basics",
       "url": "color-picker-field-basic-demos",
-      "src": "color-picker-field-basic-demos.html",
+      "src": "color-picker-field-basic-demos.js",
       "meta": {
         "title": "Color Picker Field Basics",
         "description": "",
@@ -14,7 +14,7 @@
     {
       "name": "Styling",
       "url": "color-picker-field-styling-demos",
-      "src": "color-picker-field-styling-demos.html",
+      "src": "color-picker-field-styling-demos.js",
       "meta": {
         "title": "Color Picker Field Styling",
         "description": "",
@@ -24,7 +24,7 @@
     {
       "name": "Advanced",
       "url": "color-picker-field-advanced-demos",
-      "src": "color-picker-field-advanced-demos.html",
+      "src": "color-picker-field-advanced-demos.js",
       "meta": {
         "title": "Color Picker Field Advanced",
         "description": "",

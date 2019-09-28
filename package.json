@@ -1,8 +1,8 @@
 {
-  "name": "@juchar/color-picker-field",
-  "version": "0.2.3",
+  "name": "@appreciated/color-picker-field",
+  "version": "2.0.0-alpha.1",
   "description": "color-picker-field",
-  "main": "color-picker-field.html",
+  "main": "color-picker-field.js",
   "repository": "juchar/color-picker-field",
   "keywords": [
     "Vaadin",
@@ -32,19 +32,29 @@
     "check:bower": "magi check-bower",
     "check:version": "magi check-version",
     "lint": "npm-run-all --parallel lint:*",
-    "lint:css": "stylelint *.html src/*.html demo/*.html theme/**/*.html",
-    "lint:html": "eslint *.html src demo --ext .html",
-    "prestart": "polymer analyze > analysis.json",
-    "start": "polymer serve --port 3000 --open",
+    "lint:css": "stylelint *.js src/*.js demo/*.js theme/**/*.js",
+    "lint:js": "eslint *.js src demo --ext .js",
+    "start": "polymer serve --port 3000 --npm",
     "preversion": "magi update-version"
   },
   "devDependencies": {
-    "@vaadin/vaadin-component-dev-dependencies": "^3.0.0"
+    "@vaadin/vaadin-component-dev-dependencies": "^3.0.0",
+    "@polymer/iron-component-page": "^4.0.1",
+    "@vaadin/vaadin-demo-helpers": "^3.0.0",
+    "@webcomponents/webcomponentsjs": "^2.3.0"
   },
   "dependencies": {
-    "@vaadin/vaadin-button": "^2.2.0",
+    "@appreciated/color-picker": "^2.0.0-alpha.2",
+    "@polymer/iron-icon": "^3.0.1",
+    "@polymer/iron-media-query": "^3.0.1",
+    "@polymer/polymer": "^3.3.0",
+    "@vaadin/vaadin-button": "^2.2.1",
+    "@vaadin/vaadin-context-menu": "^4.3.12",
     "@vaadin/vaadin-icons": "^4.3.1",
-    "@vaadin/vaadin-tabs": "^3.0.0",
-    "@vaadin/vaadin-text-field": "^2.4.4"
+    "@vaadin/vaadin-ordered-layout": "^1.1.0",
+    "@vaadin/vaadin-tabs": "^3.0.4",
+    "@vaadin/vaadin-text-field": "^2.4.11",
+    "@vaadin/vaadin-themable-mixin": "^1.4.4",
+    "tinycolor2": "^1.4.1"
   }
 }
