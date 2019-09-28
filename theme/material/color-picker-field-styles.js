@@ -82,3 +82,22 @@ $_documentContainer.innerHTML = `
 </dom-module>
 `;
 document.head.appendChild($_documentContainer.content);
+
+const $_documentContainer2 = document.createElement('template');
+
+$_documentContainer2.innerHTML = `
+<dom-module id="color-picker-field-overlay" theme-for="vaadin-context-menu-overlay">
+  <template>
+    <style>
+      :host([theme~="color-picker-field-overlay"]) [part="overlay"] {
+        max-height: unset;
+        overflow: hidden;
+      }
+      :host([theme~="color-picker-field-overlay"]) [part="content"] {
+        padding: unset;
+      }
+    </style>
+  </template>
+</dom-module>
+  `;
+document.head.appendChild($_documentContainer2.content);

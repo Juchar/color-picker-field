@@ -15,7 +15,7 @@ $_documentContainer.innerHTML = `
   <template>
     <style>
       :host {
-      --color - picker - field - alpha - checkerboard - foreground - color: var(--lumo-contrast-20pct);
+      --color-picker-field-alpha-checkerboard-foreground-color: var(--lumo-contrast-20pct);
       --color-picker-field-alpha-checkerboard-background-color: var(--lumo-base-color);
       --color-picker-field-alpha-checkerboard-tile-size: calc(var(--lumo-size-xs) / 2);
       --color-picker-field-alpha-checkerboard-background-style: {
@@ -41,7 +41,6 @@ $_documentContainer.innerHTML = `
         min-width: 100%;
         max-width: 100%;
         box-sizing: border-box;
-        padding: var(--lumo-space-m);
       } 
       [part="footer"] {
         margin - top: calc(2 * var(--lumo-space-m));
@@ -63,3 +62,22 @@ $_documentContainer.innerHTML = `
 </dom-module>
 `;
 document.head.appendChild($_documentContainer.content);
+
+const $_documentContainer2 = document.createElement('template');
+
+$_documentContainer2.innerHTML = `
+<dom-module id="color-picker-field-overlay" theme-for="vaadin-context-menu-overlay">
+  <template>
+    <style>
+      :host([theme~="color-picker-field-overlay"]) [part="overlay"] {
+        max-height: unset;
+        overflow: hidden;
+      }
+      :host([theme~="color-picker-field-overlay"]) [part="content"] {
+        padding: unset;
+      }
+    </style>
+  </template>
+</dom-module>
+  `;
+document.head.appendChild($_documentContainer2.content);

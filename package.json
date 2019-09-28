@@ -34,7 +34,7 @@
     "lint": "npm-run-all --parallel lint:*",
     "lint:css": "stylelint *.js src/*.js demo/*.js theme/**/*.js",
     "lint:js": "eslint *.js src demo --ext .js",
-    "start": "polymer serve --port 3000 --open --npm",
+    "start": "polymer serve --port 3000 --npm",
     "preversion": "magi update-version"
   },
   "devDependencies": {
@@ -44,16 +44,17 @@
     "@webcomponents/webcomponentsjs": "^2.3.0"
   },
   "dependencies": {
-    "@polymer/polymer": "^3.3.0",
-    "@polymer/iron-media-query": "^3.0.1",
+    "@appreciated/color-picker": "^2.0.0-alpha.2",
     "@polymer/iron-icon": "^3.0.1",
+    "@polymer/iron-media-query": "^3.0.1",
+    "@polymer/polymer": "^3.3.0",
     "@vaadin/vaadin-button": "^2.2.1",
     "@vaadin/vaadin-context-menu": "^4.3.12",
     "@vaadin/vaadin-icons": "^4.3.1",
+    "@vaadin/vaadin-ordered-layout": "^1.1.0",
     "@vaadin/vaadin-tabs": "^3.0.4",
-    "tinycolor2": "^1.4.1",
     "@vaadin/vaadin-text-field": "^2.4.11",
     "@vaadin/vaadin-themable-mixin": "^1.4.4",
-    "@appreciated/color-picker": "^2.0.0-alpha.2"
+    "tinycolor2": "^1.4.1"
   }
 }

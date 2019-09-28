@@ -5,6 +5,7 @@ import '@polymer/iron-media-query/iron-media-query.js';
 import '@polymer/iron-icon/iron-icon.js';
 import '@vaadin/vaadin-text-field';
 import '@vaadin/vaadin-button/src/vaadin-button.js';
+import '@vaadin/vaadin-ordered-layout';
 import '@vaadin/vaadin-context-menu/src/vaadin-context-menu.js';
 import 'tinycolor2';
 
@@ -107,20 +108,16 @@ class ColorPickerField extends PolymerElement {
 
       [part="footer"] {
         display: flex;
+        justify-content: flex-end; 
+        width: 100%;
       }
-
-      [part="submit"],
-      [part="cancel"] {
-        flex-grow: 1;
-        margin-top: 0;
-        margin-bottom: 0;
-      }
+      
     </style>  
     <vaadin-text-field id="text-field">
       <span part="select-color-button" slot="prefix">
         <vaadin-context-menu close-on="_closeColorPickerPopUp" open-on="click" theme="color-picker-field-overlay">
             <template>
-              <div part="popup-content">
+              <vaadin-vertical-layout theme="spacing padding" part="popup-content">
                   <color-picker disable-alpha="[[disableAlpha]]" disable-hex="[[disableHex]]"
                                 disable-hsl="[[disableHsl]]"
                                 disable-rgb="[[disableRgb]]"
@@ -133,13 +130,13 @@ class ColorPickerField extends PolymerElement {
                                 step-hsl="[[stepHsl]]"
                                 theme$="[[theme]]"
                                 value="{{_popUpColor}}"></color-picker>
-                  <div part="footer">
+                  <vaadin-horizontal-layout theme="spacing" part="footer">
                     <vaadin-button on-click="_cancelPopUp" part="cancel"
                                    theme$="[[theme]]">{{labelCancel}}</vaadin-button>
                     <vaadin-button on-click="_selectPopUpColor" part="submit" theme$="primary [[theme]]">{{labelSelect}}
                     </vaadin-button>
-                  </div>
-                </div>
+                  </vaadin-horizontal-layout>
+                </vaadin-vertical-layout>
             </template>
           <iron-media-query query="[[nativeInputMediaQuery]]" query-matches="{{_nativeInput}}"></iron-media-query>
           <div part="select-color-button-color"></div>
@@ -320,8 +317,16 @@ class ColorPickerField extends PolymerElement {
     this._textField = this.shadowRoot.querySelector('#text-field');
     this._inputElement = this._textField.shadowRoot.querySelector('[part="value"]');
     this._textField.value = this.getAttribute('value');
+    this._transferAttribute('disabled');
+    this._transferAttribute('readonly');
     // this._textField._createPropertyObserver('value', this._updateOnValueChange, true);
     this._updateOnValueChange();
+  }
+
+  _transferAttribute(attribute) {
+    if (this.hasAttribute(attribute)) {
+      this._textField.setAttribute(attribute, this.getAttribute(attribute));
+    }
   }
 
   _showChangeFormatButton() {
