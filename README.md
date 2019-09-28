@@ -36,23 +36,18 @@ You should not mix Bower and npm versions in the same application, though.
 
 The converted ES Modules are only published on npm, not pushed to GitHub repositories.
 
-### Bower (HTML Imports compatible version)
-
-Install `color-picker-field`:
-
-```sh
-bower i juchar/color-picker-field --save
-```
-
-Once installed, import it in your application:
-
-```html
-<link rel="import" href="bower_components/color-picker-field/color-picker-field.html">
-```
 
 ### npm (ES Modules compatible version)
 
-Not available yet.
+Install `color-picker`:
+
+```sh
+npm install @appreciated/color-picker-field
+```
+
+```js
+import "@appreciated/color-picker/color-picker-field.js"
+```
 
 ## Getting started
 
