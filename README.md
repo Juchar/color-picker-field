@@ -72,17 +72,20 @@ To use the Material theme, import the correspondent file from the `theme/materia
 
 ## Running demos and tests in a browser
 
+
+## Running demos and tests in a browser
+
 1. Fork the `color-picker-field` repository and clone it locally.
 
-1. Make sure you have [npm](https://www.npmjs.com/) and [Bower](https://bower.io) installed.
+2. Make sure you have [npm](https://www.npmjs.com/) installed.
 
-1. When in the `color-picker-field` directory, run `npm install` and then `bower install` to install dependencies.
+3. When in the `color-picker-field` directory, run `npm install` to install dependencies.
 
-1. Make sure you have [polymer-cli](https://www.npmjs.com/package/polymer-cli) installed globally: `npm i -g polymer-cli`.
+4. Make sure you have [polymer-cli](https://www.npmjs.com/package/polymer-cli) installed globally: `npm i -g polymer-cli`.
 
-1. Run `npm start`, browser will automatically open the component API documentation.
+5. Run `npm start`, browser will automatically open the component API documentation.
 
-1. You can also open demo or in-browser tests by adding **demo** or **test** to the URL, for example:
+6. You can also open demo or in-browser tests by adding **demo** or **test** to the URL, for example:
 
   - http://127.0.0.1:3000/components/color-picker-field/demo
   - http://127.0.0.1:3000/components/color-picker-field/test
