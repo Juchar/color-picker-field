@@ -7,7 +7,7 @@ import '@vaadin/vaadin-text-field';
 import '@vaadin/vaadin-button/src/vaadin-button.js';
 import '@vaadin/vaadin-ordered-layout';
 import '@vaadin/vaadin-context-menu/src/vaadin-context-menu.js';
-import 'tinycolor2';
+import {tinycolor} from '@thebespokepixel/es-tinycolor';
 
 /**
  * `<color-picker-field>` allows to select a color using sliders, inputs or palettes.
@@ -159,7 +159,7 @@ class ColorPickerField extends PolymerElement {
   }
 
   static get version() {
-    return '2.0.0-alpha.1';
+    return '2.0.0-alpha.2';
   }
 
   static get properties() {
