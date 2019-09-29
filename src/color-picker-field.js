@@ -73,19 +73,15 @@ class ColorPickerField extends PolymerElement {
       }
 
       [part="select-color-button-icon"] {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%) scale(0.3);
         width: 100%;
         height: 100%;
         box-sizing: border-box;
         padding: 4px;
-        opacity: 0;
+        opacity: 0.5;
+        transition: opacity 0.3s ease;
       }
 
       :host(:not([readonly])) [part="select-color-button"]:hover [part="select-color-button-icon"] {
-        transform: translate(-50%, -50%) scale(1);
         opacity: 1;
       }
       

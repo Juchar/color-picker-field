@@ -35,8 +35,8 @@ $_documentContainer.innerHTML = `
       }
 
       [part="select-color-button-icon"] {
-        transition: transform .1s, opacity .2s;
-        will-change: transform;
+        transition: opacity .2s;
+        will-change: opacity;
       }
 
       [part="popup-content"] {

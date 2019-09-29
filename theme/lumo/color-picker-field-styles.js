@@ -33,8 +33,8 @@ $_documentContainer.innerHTML = `
         @apply --color-picker-field-alpha-checkerboard-background-style;
       } 
       [part="select-color-button-icon"] {
-        transition: transform .25s cubic-bezier(.12, .32, .54, 2), opacity .4s;
-        will-change: transform;
+        transition: opacity .4s;
+        will-change: opacity;
       } 
       [part="popup-content"] {
         width: 400px;
