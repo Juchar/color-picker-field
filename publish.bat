@@ -1,1 +1,2 @@
-npm login && npm publish --access public
+:: npm adduser
+npm publish --access public
