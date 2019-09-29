@@ -96,6 +96,7 @@ class ColorPickerField extends PolymerElement {
       [part="switch-format-button"] {
         padding: 2px;
         box-sizing: border-box;
+        --lumo-primary-text-color: var(--lumo-contrast-70pct);
       }
 
       [part="switch-format-button"][disabled] {
@@ -146,12 +147,9 @@ class ColorPickerField extends PolymerElement {
         </vaadin-context-menu>
         <input native-input$="[[_nativeInput]]" part="native-input" type="color" value="{{value::change}}">
       </span>
-      <iron-icon slot="suffix" hidden$="[[!_showChangeFormatButton(disableHex,disableRgb,disableHsl)]]"
-                 icon="vaadin:sort"
-                 on-click="_nextFormat"
-                 on-mousedown="_changeFormatButtonMouseDown"
-                 on-touchend="_changeFormatButtonTouchend"
-                 part="switch-format-button"></iron-icon>
+      <vaadin-button slot="suffix"  on-click="_nextFormat" hidden$="[[!_showChangeFormatButton(disableHex,disableRgb,disableHsl)]]" theme="tertiary-inline" part="switch-format-button">
+        <iron-icon icon="vaadin:sort"></iron-icon>
+      </vaadin-button>
     </vaadin-text-field>
   `;
   }

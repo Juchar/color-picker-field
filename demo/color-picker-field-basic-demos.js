@@ -33,7 +33,7 @@ class ColorPickerFieldBasicDemos extends window.DemoReadyEventEmitter(ColorPicke
       inside a popup.</p>
     <vaadin-demo-snippet id="color-picker-field-basic-color-picker" when-defined="color-picker-field">
         <color-picker-field></color-picker-field>
-        <color-picker-field value="#00b4f0" show-change-format-button></color-picker-field>
+        <color-picker-field show-change-format-button></color-picker-field>
         <color-picker-field value="#00b4f0" disabled></color-picker-field>
         <color-picker-field value="#00b4f0" readonly></color-picker-field>
     </vaadin-demo-snippet>
