@@ -1,6 +1,6 @@
 {
   "name": "@appreciated/color-picker-field",
-  "version": "2.0.0-alpha.2",
+  "version": "2.0.0-alpha.3",
   "description": "color-picker-field",
   "main": "color-picker-field.js",
   "repository": "juchar/color-picker-field",
@@ -49,7 +49,7 @@
     "@vaadin/vaadin-element-mixin": "^2.0.0",
     "@vaadin/vaadin-themable-mixin": "^1.2.1",
     "@thebespokepixel/es-tinycolor": "^1.0.7",
-    "@appreciated/color-picker": "^2.0.0-alpha.2",
+    "@appreciated/color-picker": "^2.0.0-beta.1",
     "@polymer/iron-icon": "^3.0.1",
     "@polymer/iron-media-query": "^3.0.1",
     "@vaadin/vaadin-button": "^2.2.1",
