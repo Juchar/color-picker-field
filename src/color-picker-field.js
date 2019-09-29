@@ -20,6 +20,7 @@ import {tinycolor} from '@thebespokepixel/es-tinycolor';
  */
 
 class ColorPickerField extends PolymerElement {
+
   static get template() {
     return html`
     <style>
@@ -39,6 +40,7 @@ class ColorPickerField extends PolymerElement {
         left: 0;
         width: 100%;
         height: 100%;
+        border-radius: var(--lumo-border-radius);
       }
 
       [part="native-input"] {
@@ -113,7 +115,7 @@ class ColorPickerField extends PolymerElement {
       }
       
     </style>  
-    <vaadin-text-field id="text-field">
+    <vaadin-text-field value="{{value}}" id="text-field">
       <span part="select-color-button" slot="prefix">
         <vaadin-context-menu close-on="_closeColorPickerPopUp" open-on="click" theme="color-picker-field-overlay">
             <template>
@@ -164,6 +166,9 @@ class ColorPickerField extends PolymerElement {
 
   static get properties() {
     return {
+      value: {
+        type: String
+      },
       /**
        * The label to show on the button to select a color in the color picker popup.
        */
@@ -316,11 +321,11 @@ class ColorPickerField extends PolymerElement {
     });
     this._textField = this.shadowRoot.querySelector('#text-field');
     this._inputElement = this._textField.shadowRoot.querySelector('[part="value"]');
-    this._textField.value = this.getAttribute('value');
+    this.value = this.getAttribute('value');
     this._transferAttribute('disabled');
     this._transferAttribute('readonly');
-    // this._textField._createPropertyObserver('value', this._updateOnValueChange, true);
-    this._updateOnValueChange();
+    this._createPropertyObserver('value', this._updateOnValueChange);
+    this._updateOnValueChange(this.value);
   }
 
   _transferAttribute(attribute) {
@@ -362,7 +367,7 @@ class ColorPickerField extends PolymerElement {
 
   _selectPopUpColor(e) {
     this._cancelPopUp(e);
-    this._textField.value = this._popUpColor.replace(/,/g, ', ');
+    this.value = this._popUpColor.replace(/,/g, ', ');
     this.dispatchEvent(new CustomEvent('change', {bubbles: true}));
   }
 
@@ -372,7 +377,7 @@ class ColorPickerField extends PolymerElement {
 
   _updateOnValueChange(value) {
     this._changeFormatButton.removeAttribute('disabled');
-    const validColor = '' !== this._textField.value.trim() && this._textField.checkValidity();
+    const validColor = this.value && '' !== this.value.trim() && this._textField.checkValidity();
     if (validColor) {
       const color = this._getResolvedColor();
       if (color !== undefined) {
@@ -388,21 +393,15 @@ class ColorPickerField extends PolymerElement {
   }
 
   _updateSelectedColor(color) {
-    if (this._selectColorButtonColor) {
-      this._selectColorButtonColor.style.background = color.toHslString();
-    }
-
-    if (this._selectColorButtonIcon) {
-      this._selectColorButtonIcon.style.color = ColorPickerUtils.getContrastColor(color);
-    }
-
-    this._popUpColor = color.toHslString();
-    this._previousColor = color.toHslString();
+    this._selectColorButtonColor.style.background = color.toRgbString();
+    this._selectColorButtonIcon.style.color = ColorPickerUtils.getContrastColor(color);
+    this._popUpColor = color.toRgbString();
+    this._previousColor = color.toRgbString();
   }
 
   _updateHistory(color) {
     if (this.enableHistory) {
-      const newColor = color.toHslString();
+      const newColor = color.toRgbString();
       this.palettes = [(this.palettes
         ? [newColor, ...this.palettes[0].filter(v => v !== newColor)].slice(0, this.maxHistory)
         : [newColor])];
@@ -410,9 +409,7 @@ class ColorPickerField extends PolymerElement {
   }
 
   _getResolvedColor() {
-    return this.enableCssCustomProperties
-      ? ColorPickerUtils.getResolvedValue(this, this._textField.value)
-      : tinycolor(this._textField.value);
+    return tinycolor(this.value);
   }
 
   _getEnabledFormats() {
