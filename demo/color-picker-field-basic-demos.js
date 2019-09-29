@@ -32,7 +32,7 @@ class ColorPickerFieldBasicDemos extends window.DemoReadyEventEmitter(ColorPicke
     <p>Click the arrows to switch between <b>hex</b>, <b>rgb</b> and <b>hsl</b>. Click the color to use a color picker
       inside a popup.</p>
     <vaadin-demo-snippet id="color-picker-field-basic-color-picker" when-defined="color-picker-field">
-        <color-picker-field></color-picker-field>
+        <color-picker-field style="width:400px"></color-picker-field>
         <color-picker-field show-change-format-button></color-picker-field>
         <color-picker-field value="#00b4f0" disabled></color-picker-field>
         <color-picker-field value="#00b4f0" readonly></color-picker-field>

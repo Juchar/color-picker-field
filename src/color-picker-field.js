@@ -72,6 +72,10 @@ class ColorPickerField extends PolymerElement {
         display: none;
       }
 
+        :host{
+            display: flex;
+        }
+
       [part="select-color-button-icon"] {
         width: 100%;
         height: 100%;
@@ -112,7 +116,7 @@ class ColorPickerField extends PolymerElement {
       }
       
     </style>  
-    <vaadin-text-field value="{{value}}" id="text-field">
+    <vaadin-text-field style="flex-grow: 1" value="{{value}}" id="text-field">
       <span part="select-color-button" slot="prefix">
         <vaadin-context-menu close-on="_closeColorPickerPopUp" open-on="click" theme="color-picker-field-overlay">
             <template>
