@@ -9,7 +9,7 @@
 [![Build Status](https://travis-ci.org/Juchar/color-picker-field.svg?branch=master)](https://travis-ci.org/Juchar/color-picker-field)
 [![Bower version](https://badgen.net/github/release/juchar/color-picker-field)](https://github.com/juchar/color-picker-field/releases)
 [![Published on Vaadin Directory](https://img.shields.io/badge/Vaadin%20Directory-published-00b4f0.svg)](https://vaadin.com/directory/component/jucharcolor-picker-field)
-
+[![npm version](https://badge.fury.io/js/%40appreciated%2Fcolor-picker-field.svg)](https://badge.fury.io/js/%40appreciated%2Fcolor-picker-field)
 <!--
 ```
 <custom-element-demo>
