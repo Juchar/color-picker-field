@@ -81,7 +81,7 @@ class ColorPickerField extends PolymerElement {
         height: 100%;
         box-sizing: border-box;
         padding: 4px;
-        opacity: 0.5;
+        opacity: 0.7;
         transition: opacity 0.3s ease;
       }
 
@@ -159,7 +159,7 @@ class ColorPickerField extends PolymerElement {
   }
 
   static get version() {
-    return '2.0.0-alpha.8';
+    return '2.0.0-beta.1';
   }
 
   static get properties() {
