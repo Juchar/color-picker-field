@@ -159,7 +159,7 @@ class ColorPickerField extends PolymerElement {
   }
 
   static get version() {
-    return '2.0.0-alpha.2';
+    return '2.0.0-alpha.8';
   }
 
   static get properties() {
@@ -314,9 +314,6 @@ class ColorPickerField extends PolymerElement {
     this._selectColorButtonIcon = this.shadowRoot.querySelector('[part="select-color-button-icon"]');
     this._selectColorButtonColor = this.shadowRoot.querySelector('[part="select-color-button-color"]');
     this._changeFormatButton = this.shadowRoot.querySelector('[part="switch-format-button"]');
-    this._changeFormatButton.addEventListener('click', evt => {
-      this._changeFormatButtonTouchend(evt);
-    });
     this._textField = this.shadowRoot.querySelector('#text-field');
     this._inputElement = this._textField.shadowRoot.querySelector('[part="value"]');
     this.value = this.getAttribute('value');
@@ -340,11 +337,6 @@ class ColorPickerField extends PolymerElement {
     if (this.hasAttribute('focused')) {
       e.preventDefault();
     }
-  }
-
-  _changeFormatButtonTouchend(e) {
-    e.preventDefault();
-    this._nextFormat();
   }
 
   _nextFormat() {
