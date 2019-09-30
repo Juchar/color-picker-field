@@ -165,7 +165,8 @@ class ColorPickerField extends PolymerElement {
   static get properties() {
     return {
       value: {
-        type: String
+        type: String,
+        notify: true
       },
       /**
        * The label to show on the button to select a color in the color picker popup.
