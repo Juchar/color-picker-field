@@ -116,7 +116,7 @@ class ColorPickerField extends PolymerElement {
       }
       
     </style>  
-    <vaadin-text-field style="flex-grow: 1" value="{{value}}" id="text-field">
+    <vaadin-text-field style="flex-grow: 1" value="{{value}}" id="text-field" disabled="{{disabled}}" readonly="{{readonly}}">
       <span part="select-color-button" slot="prefix">
         <vaadin-context-menu close-on="_closeColorPickerPopUp" open-on="click" theme="color-picker-field-overlay">
             <template>
@@ -167,6 +167,14 @@ class ColorPickerField extends PolymerElement {
       value: {
         type: String,
         notify: true
+      },
+      disabled: {
+        type: Boolean,
+        notify:true
+      },
+      readonly: {
+        type: Boolean,
+        notify:true
       },
       /**
        * The label to show on the button to select a color in the color picker popup.
@@ -317,7 +325,7 @@ class ColorPickerField extends PolymerElement {
     this._changeFormatButton = this.shadowRoot.querySelector('[part="switch-format-button"]');
     this._textField = this.shadowRoot.querySelector('#text-field');
     this._inputElement = this._textField.shadowRoot.querySelector('[part="value"]');
-    this.value = this.getAttribute('value');
+    this._transferAttribute('value');
     this._transferAttribute('disabled');
     this._transferAttribute('readonly');
     this._createPropertyObserver('value', this._updateOnValueChange);
