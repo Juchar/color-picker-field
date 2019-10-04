@@ -159,7 +159,7 @@ class ColorPickerField extends PolymerElement {
   }
 
   static get version() {
-    return '2.0.0-beta.2';
+    return '2.0.0-beta.4';
   }
 
   static get properties() {
@@ -359,7 +359,7 @@ class ColorPickerField extends PolymerElement {
       || 1;
 
     this._textField.value = ColorPickerUtils.getFormattedColor(resolvedColor, nextFormat, this.stepAlpha, resolution).replace(/,/g, ', ');
-    this.dispatchEvent(new CustomEvent('change', {bubbles: true}));
+    this._textField.dispatchEvent(new CustomEvent('change', {bubbles: true}));
 
     this._inputElement.focus();
   }
@@ -367,7 +367,7 @@ class ColorPickerField extends PolymerElement {
   _selectPopUpColor(e) {
     this._cancelPopUp(e);
     this.value = this._popUpColor.replace(/,/g, ', ');
-    this.dispatchEvent(new CustomEvent('change', {bubbles: true}));
+    this._textField.dispatchEvent(new CustomEvent('change', {bubbles: true}));
   }
 
   _cancelPopUp(e) {
@@ -375,7 +375,7 @@ class ColorPickerField extends PolymerElement {
   }
 
   _updateOnValueChange(value) {
-    this._textField.dispatchEvent(new CustomEvent('value-changed', {value: value}));
+    this._textField.dispatchEvent(new CustomEvent('change', {bubbles: true}));
     this._changeFormatButton.removeAttribute('disabled');
     const validColor = this.value && '' !== this.value.trim() && this._textField.checkValidity();
     if (validColor) {
