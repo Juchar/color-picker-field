@@ -170,11 +170,11 @@ class ColorPickerField extends PolymerElement {
       },
       disabled: {
         type: Boolean,
-        notify:true
+        notify: true
       },
       readonly: {
         type: Boolean,
-        notify:true
+        notify: true
       },
       /**
        * The label to show on the button to select a color in the color picker popup.
@@ -375,6 +375,7 @@ class ColorPickerField extends PolymerElement {
   }
 
   _updateOnValueChange(value) {
+    this._textField.dispatchEvent(new CustomEvent('value-changed', {value: value}));
     this._changeFormatButton.removeAttribute('disabled');
     const validColor = this.value && '' !== this.value.trim() && this._textField.checkValidity();
     if (validColor) {
